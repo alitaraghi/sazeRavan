@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوره‌های آموزشی - PsyClinic</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="دوره‌های تخصصی در حوزه سلامت روان با بهترین مشاوران کشور. از مبتدی تا پیشرفته.">
+    <meta name="keywords" content="دوره‌های روانشناسی, آموزش روانشناسی, سلامت روان, مشاوره آنلاین">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://psyclinic.ir/courses.html">
+    <meta property="og:title" content="دوره‌های آموزشی - PsyClinic">
+    <meta property="og:description" content="دوره‌های تخصصی در حوزه سلامت روان با بهترین مشاوران کشور.">
+    <meta property="og:image" content="https://psyclinic.ir/images/courses-banner.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://psyclinic.ir/courses.html">
+    <meta property="twitter:title" content="دوره‌های آموزشی - PsyClinic">
+    <meta property="twitter:description" content="دوره‌های تخصصی در حوزه سلامت روان با بهترین مشاوران کشور.">
+
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS for Courses Page -->
+    <style>
+        .courses-hero {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(76, 201, 240, 0.05)),
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .course-image {
+            height: 200px;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-instructor {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .instructor-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            border: 2px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .course-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .course-discount {
+            text-decoration: line-through;
+            color: #6c757d;
+            margin-left: 10px;
+        }
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .popular-course {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .popular-course-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-left: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="sticky-top bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="bi bi-house-door me-1"></i>صفحه اصلی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">
+                                <i class="bi bi-journal-text me-1"></i>وبلاگ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="courses.html">
+                                <i class="bi bi-book me-1"></i>دوره‌های آموزشی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="psychologists.html">
+                                <i class="bi bi-people me-1"></i>مشاوران
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i>درباره ما
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="bi bi-envelope me-1"></i>تماس با ما
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary me-2">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>ورود
+                        </a>
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i>ثبت‌نام
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="courses-hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4" data-aos="fade-up">دوره‌های آموزشی تخصصی</h1>
+            <p class="lead mb-4" data-aos="fade-up" data-aos-delay="200">
+                با بهترین مشاوران کشور، از خانه یاد بگیرید
+            </p>
+            <div class="input-group w-75 mx-auto" data-aos="fade-up" data-aos-delay="400">
+                <input type="text" class="form-control form-control-lg" placeholder="جستجوی دوره...">
+                <button class="btn btn-primary" type="button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="row">
+            <!-- Main Column (75%) -->
+            <div class="col-lg-9">
+                <!-- Filter & Sort -->
+                <div class="mb-4" data-aos="fade-up">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="me-3">مرتب‌سازی:</span>
+                            <select class="form-select form-select-sm">
+                                <option>جدیدترین</option>
+                                <option>محبوب‌ترین</option>
+                                <option>ارزان‌ترین</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="me-3">نمایش:</span>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-grid"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses List -->
+                <div class="row" id="coursesList">
+                    <!-- Course 1 -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                        <div class="course-card">
+                            <div class="course-image">
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                     class="w-100 h-100" alt="دوره">
+                                <span class="course-badge">تخفیف ویژه</span>
+                            </div>
+                            <div class="course-content">
+                                <div class="course-instructor">
+                                    <img src="https://via.placeholder.com/40x40.png?text=Author" class="instructor-avatar">
+                                    <div>
+                                        <strong>دکتر مریم احمدی</strong>
+                                        <div class="small text-muted">روانشناس بالینی</div>
+                                    </div>
+                                </div>
+                                <h5 class="card-title">مدیریت اضطراب برای مبتدیان</h5>
+                                <p class="card-text small text-muted">
+                                    یاد بگیرید چگونه با اضطراب کنار بیایید و کیفیت زندگی خود را بهبود بخشید.
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <span class="course-price">۱۹۹,۰۰۰ تومان</span>
+                                        <span class="course-discount">۲۹۹,۰۰۰ تومان</span>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                        <span class="small text-muted">(۱۵۶)</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="course-detail.html?id=1" class="btn btn-primary">
+                                        <i class="bi bi-book me-1"></i>مشاهده دوره
+                                    </a>
+                                    <button class="btn btn-outline-secondary">
+                                        <i class="bi bi-heart me-1"></i>علاقه‌مندی
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="course-card">
+                            <div class="course-image">
+                                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                     class="w-100 h-100" alt="دوره">
+                            </div>
+                            <div class="course-content">
+                                <div class="course-instructor">
+                                    <img src="https://via.placeholder.com/40x40.png?text=Author" class="instructor-avatar">
+                                    <div>
+                                        <strong>دکتر علی رضایی</strong>
+                                        <div class="small text-muted">روانشناس کودک</div>
+                                    </div>
+                                </div>
+                                <h5 class="card-title">تکنیک‌های تنفس برای آرامش</h5>
+                                <p class="card-text small text-muted">
+                                    آموزش گام به گام تکنیک‌های تنفس برای کاهش استرس و بهبود کیفیت خواب.
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <span class="course-price">۱۴۹,۰۰۰ تومان</span>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star text-warning"></i>
+                                        <span class="small text-muted">(۹۸)</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="course-detail.html?id=2" class="btn btn-primary">
+                                        <i class="bi bi-book me-1"></i>مشاهده دوره
+                                    </a>
+                                    <button class="btn btn-outline-secondary">
+                                        <i class="bi bi-heart me-1"></i>علاقه‌مندی
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="course-card">
+                            <div class="course-image">
+                                <img src="https://images.unsplash.com/photo-1519750783826-e242032a0a22?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                     class="w-100 h-100" alt="دوره">
+                            </div>
+                            <div class="course-content">
+                                <div class="course-instructor">
+                                    <img src="https://via.placeholder.com/40x40.png?text=Author" class="instructor-avatar">
+                                    <div>
+                                        <strong>دکتر فاطمه حسینی</strong>
+                                        <div class="small text-muted">زوج درمانی</div>
+                                    </div>
+                                </div>
+                                <h5 class="card-title">مدیریت استرس شغلی</h5>
+                                <p class="card-text small text-muted">
+                                    راهکارهای عملی برای مدیریت استرس در محیط کار و افزایش بهره‌وری.
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <span class="course-price">۲۴۹,۰۰۰ تومان</span>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                        <span class="small text-muted">(۷۶)</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="course-detail.html?id=3" class="btn btn-primary">
+                                        <i class="bi bi-book me-1"></i>مشاهده دوره
+                                    </a>
+                                    <button class="btn btn-outline-secondary">
+                                        <i class="bi bi-heart me-1"></i>علاقه‌مندی
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add more courses as needed -->
+                </div>
+
+                <!-- Pagination -->
+                <nav aria-label="صفحه‌بندی دوره‌ها" data-aos="fade-up">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">
+                                <i class="bi bi-chevron-right me-1"></i>قبلی
+                            </a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">۱</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">۲</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">۳</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                                بعدی <i class="bi bi-chevron-left ms-1"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Sidebar (25%) -->
+            <div class="col-lg-3">
+                <div class="sidebar-sticky">
+                    <!-- Filter Section -->
+                    <div class="filter-section" data-aos="fade-up">
+                        <h5 class="mb-4">فیلترها</h5>
+                        <div class="filter-group">
+                            <label>موضوع</label>
+                            <select class="form-select">
+                                <option>همه موضوعات</option>
+                                <option>اضطراب</option>
+                                <option>استرس</option>
+                                <option>روانشناسی کودک</option>
+                                <option>زوج درمانی</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>سطح</label>
+                            <select class="form-select">
+                                <option>همه سطوح</option>
+                                <option>مقدماتی</option>
+                                <option>متوسط</option>
+                                <option>پیشرفته</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>قیمت</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="free">
+                                <label class="form-check-label" for="free">رایگان</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="paid">
+                                <label class="form-check-label" for="paid">پولی</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="discount">
+                                <label class="form-check-label" for="discount">تخفیف‌دار</label>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <label>مدرس</label>
+                            <select class="form-select">
+                                <option>همه مدرسان</option>
+                                <option>دکتر مریم احمدی</option>
+                                <option>دکتر علی رضایی</option>
+                                <option>دکتر فاطمه حسینی</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary w-100">
+                            <i class="bi bi-funnel me-1"></i>اعمال فیلترها
+                        </button>
+                    </div>
+
+                    <!-- Popular Courses -->
+                    <div class="filter-section mt-4" data-aos="fade-up" data-aos-delay="200">
+                        <h5 class="mb-4">محبوب‌ترین دوره‌ها</h5>
+                        <div class="popular-course">
+                            <div class="d-flex align-items-center">
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                                     class="popular-course-image">
+                                <div class="ms-3">
+                                    <h6 class="mb-1">مدیریت اضطراب برای مبتدیان</h6>
+                                    <small class="text-muted">دکتر مریم احمدی</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular-course">
+                            <div class="d-flex align-items-center">
+                                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                                     class="popular-course-image">
+                                <div class="ms-3">
+                                    <h6 class="mb-1">تکنیک‌های تنفس برای آرامش</h6>
+                                    <small class="text-muted">دکتر علی رضایی</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular-course">
+                            <div class="d-flex align-items-center">
+                                <img src="https://images.unsplash.com/photo-1519750783826-e242032a0a22?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                                     class="popular-course-image">
+                                <div class="ms-3">
+                                    <h6 class="mb-1">مدیریت استرس شغلی</h6>
+                                    <small class="text-muted">دکتر فاطمه حسینی</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li><a href="psychologists.html" class="text-white-50">مشاوران</a></li>
+                        <li><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li><a href="courses.html" class="text-white-50">دوره‌ها</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک</li>
+                        <li><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزرو وقت - دکتر مریم احمدی - PsyClinic</title>
+
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS for Booking Page -->
+    <style>
+        .psychologist-header {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(76, 201, 240, 0.05));
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .psychologist-avatar {
+            width: 100px;
+            height: 100px;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .service-tab {
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .service-tab:hover {
+            border-color: var(--primary-color);
+            background: rgba(108, 99, 255, 0.05);
+        }
+
+        .service-tab.active {
+            border-color: var(--primary-color);
+            background: linear-gradient(45deg, rgba(108, 99, 255, 0.1), rgba(76, 201, 240, 0.1));
+        }
+
+        .time-slot {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .time-slot.available {
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+        }
+
+        .time-slot.booked {
+            background: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+            cursor: not-allowed;
+        }
+
+        .time-slot.unavailable {
+            background: #e9ecef;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            cursor: not-allowed;
+        }
+
+        .time-slot.selected {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid #5a52d8;
+            transform: scale(1.05);
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+        }
+
+        .calendar-month {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .calendar-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            gap: 5px;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .day {
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .day.empty {
+            visibility: hidden;
+        }
+
+        .day.unavailable {
+            color: #adb5bd;
+            background: #f8f9fa;
+        }
+
+        .day.today {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .day.selected {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .confirmation-icon {
+            font-size: 5rem;
+            color: var(--success-color);
+        }
+
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .floating-cta {
+                display: block;
+            }
+            .calendar-days {
+                grid-template-columns: repeat(7, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="sticky-top bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="bi bi-house-door me-1"></i>صفحه اصلی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="psychologists.html">
+                                <i class="bi bi-people me-1"></i>مشاوران
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">
+                                <i class="bi bi-journal-text me-1"></i>وبلاگ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="courses.html">
+                                <i class="bi bi-book me-1"></i>دوره‌های آموزشی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i>درباره ما
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="bi bi-envelope me-1"></i>تماس با ما
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary me-2">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>ورود
+                        </a>
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i>ثبت‌نام
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <section class="container py-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="index.html"><i class="bi bi-house-door me-1"></i>خانه</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="psychologists.html">مشاوران</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="psychologist-profile.html?id=1">دکتر مریم احمدی</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">رزرو وقت</li>
+            </ol>
+        </nav>
+    </section>
+
+    <!-- PSYCHOLOGIST HEADER -->
+    <section class="container mb-4">
+        <div class="psychologist-header" data-aos="fade-up">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center mb-3 mb-md-0">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                         class="psychologist-avatar rounded-circle" alt="دکتر مریم احمدی">
+                </div>
+                <div class="col-md-7">
+                    <h2 class="mb-1">دکتر مریم احمدی</h2>
+                    <p class="text-muted mb-2">روانشناس بالینی</p>
+                    <div class="d-flex align-items-center">
+                        <span class="rating me-3">⭐️ 4.8 (۱۲۷ نظر)</span>
+                        <span class="text-muted">📍 تهران</span>
+                    </div>
+                </div>
+                <div class="col-md-3 text-md-end">
+                    <div class="price-tag">
+                        <i class="bi bi-currency-rial me-1"></i>۱۵۰,۰۰۰ تومان
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Service Type Selection -->
+                <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="mb-3">نوع جلسه را انتخاب کنید</h5>
+                    <div class="row">
+                        <!-- Service 1: فردی -->
+                        <div class="col-md-4">
+                            <div class="service-tab active" id="service1" onclick="selectService(1)">
+                                <i class="bi bi-person" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2">جلسه فردی</h6>
+                                <p class="mb-1">۴۵ دقیقه</p>
+                                <strong>۱۵۰,۰۰۰ تومان</strong>
+                            </div>
+                        </div>
+                        <!-- Service 2: زوج -->
+                        <div class="col-md-4">
+                            <div class="service-tab" id="service2" onclick="selectService(2)">
+                                <i class="bi bi-people" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2">جلسه زوج‌درمانی</h6>
+                                <p class="mb-1">۶۰ دقیقه</p>
+                                <strong>۲۰۰,۰۰۰ تومان</strong>
+                            </div>
+                        </div>
+                        <!-- Service 3: گروهی -->
+                        <div class="col-md-4">
+                            <div class="service-tab" id="service3" onclick="selectService(3)">
+                                <i class="bi bi-people-fill" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2">جلسه گروهی</h6>
+                                <p class="mb-1">۷۵ دقیقه</p>
+                                <strong>۱۰۰,۰۰۰ تومان</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar -->
+                <div class="calendar-month" data-aos="fade-up" data-aos-delay="400">
+                    <div class="calendar-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm" onclick="prevMonth()">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <span>خرداد ۱۴۰۴</span>
+                            <button class="btn btn-outline-primary btn-sm" onclick="nextMonth()">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="calendar-weekdays">
+                        <div>شنبه</div>
+                        <div>یکشنبه</div>
+                        <div>دوشنبه</div>
+                        <div>سه‌شنبه</div>
+                        <div>چهارشنبه</div>
+                        <div>پنجشنبه</div>
+                        <div>جمعه</div>
+                    </div>
+
+                    <div class="calendar-days" id="calendarDays">
+                        <!-- تولید روزها با JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Selected Time -->
+                <div class="mb-4" data-aos="fade-up" data-aos-delay="600" id="selectedTimeSection" style="display: none;">
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <h5 class="mb-3">
+                            <i class="bi bi-check-circle text-success me-2"></i>زمان انتخاب شده
+                        </h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>نوع جلسه:</strong> <span id="selectedService">جلسه فردی</span></p>
+                                <p class="mb-1"><strong>تاریخ:</strong> <span id="selectedDate">۱۵ خرداد ۱۴۰۴</span></p>
+                                <p class="mb-1"><strong>ساعت:</strong> <span id="selectedTime">۱۰:۰۰</span></p>
+                                <p><strong>طول جلسه:</strong> <span id="selectedDuration">۴۵ دقیقه</span></p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <h4 class="text-primary mb-0" id="selectedPrice">۱۵۰,۰۰۰ تومان</h4>
+                                <small class="text-muted">قابل پرداخت</small>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="کد تخفیف دارید؟">
+                                <button class="btn btn-outline-secondary" type="button">اعمال</button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <button class="btn btn-outline-secondary" onclick="resetSelection()">
+                                <i class="bi bi-arrow-counterclockwise me-2"></i>تغییر زمان
+                            </button>
+                            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                <i class="bi bi-credit-card me-2"></i>پرداخت
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="summary-card" data-aos="fade-up" data-aos-delay="800">
+                    <h5 class="mb-4 text-center">جزئیات جلسه</h5>
+                    
+                    <div class="text-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                             class="rounded-circle" width="80" height="80" alt="دکتر مریم احمدی">
+                        <h6 class="mt-2 mb-0">دکتر مریم احمدی</h6>
+                        <small class="text-muted">روانشناس بالینی</small>
+                    </div>
+
+                    <hr>
+
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2">
+                            <i class="bi bi-calendar-check me-2 text-primary"></i>
+                            <strong>نوع جلسه:</strong> <span id="sidebarService">جلسه فردی</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-calendar me-2 text-primary"></i>
+                            <strong>تاریخ:</strong> <span id="sidebarDate">-</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-clock me-2 text-primary"></i>
+                            <strong>ساعت:</strong> <span id="sidebarTime">-</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-hourglass me-2 text-primary"></i>
+                            <strong>مدت:</strong> <span id="sidebarDuration">-</span>
+                        </li>
+                    </ul>
+
+                    <div class="alert alert-info small">
+                        <i class="bi bi-info-circle me-2"></i>
+                        لینک ورود به جلسه ۱۵ دقیقه قبل فعال می‌شود.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Info Form (Only for guest) -->
+        <div class="row mt-4" id="userInfoForm" style="display: none;" data-aos="fade-up" data-aos-delay="1000">
+            <div class="col-lg-8">
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <h5 class="mb-4">اطلاعات شما</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">نام و نام خانوادگی</label>
+                            <input type="text" class="form-control" placeholder="مثال: زهرا محمدی">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">سن</label>
+                            <input type="number" class="form-control" placeholder="مثلاً ۲۸">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">جنسیت</label>
+                            <select class="form-select">
+                                <option>مرد</option>
+                                <option>زن</option>
+                                <option>ترجیح نمی‌دهم</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">هدف از مشاوره</label>
+                            <select class="form-select">
+                                <option>انتخاب کنید...</option>
+                                <option>اضطراب</option>
+                                <option>افسردگی</option>
+                                <option>روابط عاطفی</option>
+                                <option>استرس شغلی</option>
+                                <option>مشکلات خانوادگی</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">یادداشت (اختیاری)</label>
+                            <textarea class="form-control" rows="3" placeholder="مثلاً: قبلاً درمان روانی داشتم..."></textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="consent">
+                                <label class="form-check-label" for="consent">
+                                    من رضایت خود را به ثبت اطلاعات شخصی و استفاده فقط برای اهداف مشاوره‌ای می‌دهم.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating CTA (Mobile) -->
+    <div class="floating-cta d-none" id="floatingCta">
+        <button class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#paymentModal">
+            <i class="bi bi-credit-card me-2"></i>پرداخت - ۱۵۰,۰۰۰ تومان
+        </button>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">پرداخت جلسه</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>جزئیات جلسه</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>مشاور:</strong> دکتر مریم احمدی</li>
+                                <li class="mb-2"><strong>نوع جلسه:</strong> <span id="modalService">جلسه فردی</span></li>
+                                <li class="mb-2"><strong>تاریخ:</strong> <span id="modalDate">۱۵ خرداد ۱۴۰۴</span></li>
+                                <li class="mb-2"><strong>ساعت:</strong> <span id="modalTime">۱۰:۰۰</span></li>
+                                <li class="mb-2"><strong>قیمت:</strong> <span id="modalPrice">۱۵۰,۰۰۰ تومان</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>روش پرداخت</h6>
+                            <div class="list-group">
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="radio" name="payment" checked>
+                                    کارت بانکی (زرین‌پال)
+                                </label>
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="radio" name="payment">
+                                    کیف پول داخلی (۱۴۵,۰۰۰ تومان)
+                                </label>
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="radio" name="payment">
+                                    کارت به کارت (شماره کارت: ۶۰۳۷...۱۲۳۴)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-success" onclick="showConfirmation()">پرداخت</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">رزرو با موفقیت انجام شد!</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="bi bi-check-circle-fill confirmation-icon"></i>
+                    <h4 class="mb-4">جلسه شما رزرو شد</h4>
+                    
+                    <div class="bg-light p-3 rounded mb-4 text-start">
+                        <p class="mb-1"><strong>مشاور:</strong> دکتر مریم احمدی</p>
+                        <p class="mb-1"><strong>تاریخ:</strong> ۱۵ خرداد ۱۴۰۴</p>
+                        <p class="mb-1"><strong>ساعت:</strong> ۱۰:۰۰</p>
+                        <p class="mb-1"><strong>نوع جلسه:</strong> جلسه فردی</p>
+                        <p><strong>مبلغ:</strong> ۱۵۰,۰۰۰ تومان</p>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        لینک ورود به اتاق جلسه ۱۵ دقیقه قبل از جلسه فعال می‌شود.
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <button class="btn btn-primary" onclick="downloadPDF()">
+                            <i class="bi bi-download me-2"></i>دانلود تأییدیه PDF
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="shareBooking()">
+                            <i class="bi bi-share me-2"></i>اشتراک‌گذاری
+                        </button>
+                        <a href="index.html" class="btn btn-success">
+                            <i class="bi bi-house me-2"></i>صفحه اصلی
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>دسترسی سریح</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li><a href="psychologists.html" class="text-white-50">مشاوران</a></li>
+                        <li><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li><a href="courses.html" class="text-white-50">دوره‌ها</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک</li>
+                        <li><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Initialize calendar
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCalendar();
+        });
+
+        // Generate calendar days
+        function generateCalendar() {
+            const container = document.getElementById('calendarDays');
+            container.innerHTML = '';
+
+            // Simulate days (1 to 31)
+            for (let i = 1; i <= 31; i++) {
+                const day = document.createElement('div');
+                day.className = 'day';
+                day.textContent = i;
+
+                if (i === 15) {
+                    day.classList.add('today');
+                } else if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].includes(i)) {
+                    day.classList.add('unavailable');
+                }
+
+                day.onclick = function() {
+                    if (!this.classList.contains('unavailable')) {
+                        selectTime(i);
+                    }
+                };
+                container.appendChild(day);
+            }
+        }
+
+        // Select time slot
+        function selectTime(day) {
+            const times = document.querySelectorAll('.time-slot');
+            times.forEach(t => t.classList.remove('selected'));
+
+            const selected = document.createElement('div');
+            selected.className = 'time-slot selected';
+            selected.textContent = '۱۰:۰۰';
+
+            const container = document.querySelector('.calendar-days');
+            container.appendChild(selected);
+
+            // Show selected time section
+            document.getElementById('selectedTimeSection').style.display = 'block';
+            document.getElementById('floatingCta').classList.remove('d-none');
+
+            // Update sidebar
+            document.getElementById('sidebarDate').textContent = day + ' خرداد ۱۴۰۴';
+            document.getElementById('sidebarTime').textContent = '۱۰:۰۰';
+            document.getElementById('sidebarDuration').textContent = '۴۵ دقیقه';
+        }
+
+        // Select service
+        function selectService(id) {
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('service' + i).classList.remove('active');
+            }
+            document.getElementById('service' + id).classList.add('active');
+
+            // Update UI based on service
+            const services = {
+                1: { name: 'جلسه فردی', duration: '۴۵ دقیقه', price: '۱۵۰,۰۰۰ تومان' },
+                2: { name: 'جلسه زوج‌درمانی', duration: '۶۰ دقیقه', price: '۲۰۰,۰۰۰ تومان' },
+                3: { name: 'جلسه گروهی', duration: '۷۵ دقیقه', price: '۱۰۰,۰۰۰ تومان' }
+            };
+
+            document.getElementById('selectedService').textContent = services[id].name;
+            document.getElementById('selectedDuration').textContent = services[id].duration;
+            document.getElementById('selectedPrice').textContent = services[id].price;
+            document.getElementById('sidebarService').textContent = services[id].name;
+            document.getElementById('modalService').textContent = services[id].name;
+            document.getElementById('modalPrice').textContent = services[id].price;
+        }
+
+        // Reset selection
+        function resetSelection() {
+            document.getElementById('selectedTimeSection').style.display = 'none';
+            document.getElementById('floatingCta').classList.add('d-none');
+            const selected = document.querySelector('.time-slot.selected');
+            if (selected) selected.remove();
+        }
+
+        // Show confirmation
+        function showConfirmation() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            modal.hide();
+            const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            confirmationModal.show();
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            alert('تأییدیه PDF دانلود شد!');
+        }
+
+        // Share booking
+        function shareBooking() {
+            alert('لینک جلسه کپی شد!');
+        }
+
+        // Calendar navigation
+        function prevMonth() {
+            alert('ماه قبل');
+        }
+
+        function nextMonth() {
+            alert('ماه بعد');
+        }
+    </script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/blog-post.js"></script>
+</body>
+</html>

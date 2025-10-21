@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>پرسش‌های متداول | PsyClinic</title>
+
+  <!-- Bootstrap RTL & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="assets/css/main.css" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    .faq-hero{background:linear-gradient(135deg,#6c63ff,#4cc9f0);color:#fff;padding:80px 0;text-align:center}
+    .faq-card{border:none;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,.06);overflow:hidden;margin-bottom:15px}
+    .faq-header{background:#f8f9fa;cursor:pointer;padding:18px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+    .faq-header:hover{background:#e9ecef}
+    .faq-body{padding:0 18px;max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-body.show{padding:18px;max-height:800px}
+    .rotate{transform:rotate(180deg)}
+    .search-input{border-radius:50px;padding-inline-start:40px}
+    .search-icon{position:absolute;top:50%;transform:translateY(-50%);right:15px;color:#6c757d}
+  </style>
+</head>
+<body>
+
+<!-- HEADER: ناوبری اصلی -->
+    <header class="sticky-top bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <!-- لوگو -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+                </a>
+
+                <!-- دکمه موبایل -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- منوی اصلی -->
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">
+                                <i class="bi bi-house-door me-1"></i>صفحه اصلی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="psychologists.html">
+                                <i class="bi bi-people me-1"></i>مشاوران
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">
+                                <i class="bi bi-journal-text me-1"></i>وبلاگ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="courses.html">
+                                <i class="bi bi-book me-1"></i>دوره‌های آموزشی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i>درباره ما
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="bi bi-envelope me-1"></i>تماس با ما
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- دکمه‌های ورود/ثبت‌نام -->
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary me-2">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>ورود
+                        </a>
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i>ثبت‌نام
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+<!-- HERO -->
+<section class="faq-hero">
+  <div class="container">
+    <h1 class="display-5 fw-bold mb-3" data-aos="fade-up">پرسش‌های متداول</h1>
+    <p class="lead mb-4" data-aos="fade-up" data-aos-delay="150">سوالات پرتکرار کاربران و پاسخ‌های دقیق کارشناسان ما</p>
+
+    <!-- Search -->
+    <div class="position-relative w-75 w-md-50 mx-auto" data-aos="fade-up" data-aos-delay="300">
+      <input id="faqSearch" class="form-control form-control-lg search-input" placeholder="جستجو در سوالات..." oninput="filterFAQs()">
+      <i class="bi bi-search search-icon"></i>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ LIST -->
+<main class="container my-5">
+  <div id="faqList" class="mx-auto" style="max-width:900px">
+    <!-- سوالات با جاوااسکریپت تزریق می‌شود -->
+  </div>
+
+  <div class="text-center mt-4">
+    <button id="loadMoreBtn" class="btn btn-outline-primary px-5" onclick="loadMoreFAQs()">سوالات بیشتر</button>
+  </div>
+</main>
+
+<!-- CTA -->
+<section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-3" data-aos="zoom-in">سؤال شما هنوز بی‌پاسخ است؟</h2>
+    <p class="mb-4" data-aos="zoom-in" data-aos-delay="150">از طریق فرم تماس، سؤال خود را برای ما ارسال کنید.</p>
+    <a href="contact.html" class="btn btn-light btn-lg" data-aos="zoom-in" data-aos-delay="300"><i class="bi bi-envelope me-2"></i>ارسال پیام</a>
+  </div>
+</section>
+
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4" data-aos="fade-up">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین با بهترین متخصصان روانشناسی کشور</p>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5>دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li class="mb-2"><a href="psychologists.html" class="text-white-50">مشاوران</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li class="mb-2"><a href="courses.html" class="text-white-50">دوره‌های آموزشی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li class="mb-2"><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li class="mb-2"><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک، پلاک ۱۲۳</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3" data-aos="fade-up">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+                <div class="mt-2">
+                    <a href="privacy.html" class="me-3 text-white-50">حریم خصوصی</a>
+                    <a href="terms.html" class="me-3 text-white-50">شرایط استفاده</a>
+                    <a href="faq.html" class="text-white-50">سوالات متداول</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- ========== Scripts ========== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({once:true,duration:700});</script>
+
+<!-- FAQ JS (ساده) -->
+<script>
+  // داده‌های نمونه
+  const faqs = [
+    {id:1,q:'چطور می‌توانم مشاور را رزرو کنم؟',a:'به صفحه مشاوران بروید، مشاور را انتخاب و روی رزرو وقت کلیک کنید.'},
+    {id:2,q:'آیا مشاوره آنلاین مؤثر است؟',a:'بله؛ پژوهش‌ها نشان می‌دهد مشاوره آنلاین در اغلب موارد مؤثر است.'},
+    {id:3,q:'هزینه جلسات چقدر است؟',a:'بسته به تخصص و نوع جلسه، بین ۱۵۰ تا ۳۰۰ هزار تومان.'},
+    {id:4,q:'آیا اطلاعاتم محرمانه است؟',a:'بله، داده‌های شما رمزنگاری‌شده و فقط مشاور مربوطه دسترسی دارد.'},
+    {id:5,q:'چگونه کد تخفیف بگیرم؟',a:'در خبرنامه عضو شوید یا وبلاگ را دنبال کنید.'},
+    {id:6,q:'چطور دوره آموزشی بخرم؟',a:'به صفحه دوره‌ها بروید، دوره را انتخاب و روی ثبت‌نام کلیک کنید.'},
+    {id:7,q:'امکان لغو جلسه هست؟',a:'بله؛ تا ۲۴ ساعت قبل می‌توانید جلسه را لغو کنید.'},
+    {id:8,q:'آیا جلسات ضبط می‌شود؟',a:'فقط با رضایت شما و صرفاً برای مشاور ذخیره می‌شود.'}
+  ];
+  let rendered = 0, chunk = 4;
+
+  // رندر اولیه
+  document.addEventListener('DOMContentLoaded', ()=> renderFAQs());
+
+  function renderFAQs(){
+    const list = document.getElementById('faqList');
+    const slice = faqs.slice(rendered, rendered+chunk);
+    slice.forEach(item=>{
+      list.insertAdjacentHTML('beforeend', faqTemplate(item));
+    });
+    rendered += slice.length;
+    if(rendered>=faqs.length) document.getElementById('loadMoreBtn').style.display='none';
+    attachToggleEvents();
+  }
+
+  function faqTemplate(item){
+    return `
+    <div class="faq-card" data-id="${item.id}">
+      <div class="faq-header" aria-expanded="false">
+        ${item.q}
+        <i class="bi bi-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-body">${item.a}</div>
+    </div>`;
+  }
+
+  // Toggle
+  function attachToggleEvents(){
+    document.querySelectorAll('.faq-header').forEach(head=>{
+      head.onclick=()=>{
+        const body = head.nextElementSibling;
+        const icon = head.querySelector('.faq-icon');
+        body.classList.toggle('show');
+        head.setAttribute('aria-expanded', body.classList.contains('show'));
+        icon.classList.toggle('rotate');
+      };
+    });
+  }
+
+  // Load more
+  function loadMoreFAQs(){ renderFAQs(); }
+
+  // Filter
+  function filterFAQs(){
+    const q = document.getElementById('faqSearch').value.trim();
+    document.querySelectorAll('.faq-card').forEach(card=>{
+      const txt = card.textContent;
+      card.style.display = txt.includes(q)?'block':'none';
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پخش‌کننده دوره: مدیریت اضطراب - PsyClinic</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="پخش‌کننده دوره آموزش مدیریت اضطراب برای مبتدیان. یادگیری آنلاین مهارت‌های کنترل اضطراب.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Simplebar for custom scrollbars -->
+    <link href="https://cdn.jsdelivr.net/npm/simplebar@5.3.6/dist/simplebar.min.css" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Custom CSS for Course Player Page -->
+    <style>
+        :root {
+            --player-bg: #212529; /* Dark background for player area */
+            --sidebar-width: 320px;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header-player {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 10px 0;
+            z-index: 10;
+        }
+        
+        .progress-bar-custom {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e9ecef;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.5s ease;
+        }
+
+        .course-player-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            background-color: var(--player-bg);
+        }
+
+        .main-player-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            overflow-y: auto;
+        }
+
+        .video-player-wrapper {
+            position: sticky; /* Sticky video player */
+            top: 0;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            background-color: var(--player-bg);
+            z-index: 5;
+        }
+        .video-player-wrapper iframe, .video-player-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .lesson-content {
+            padding: 30px;
+            background-color: white;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .lesson-content h2, .lesson-content h3 {
+            color: var(--primary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        .lesson-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .lesson-quiz {
+            padding: 30px;
+            background-color: #e6f2ff;
+            border-top: 1px solid #cce5ff;
+        }
+
+        .sidebar-player {
+            width: var(--sidebar-width);
+            background-color: #f8f9fa;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+            overflow-y: auto;
+            padding: 20px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-nav-tabs .nav-link {
+            color: #6c757d;
+            border-bottom: 2px solid transparent;
+        }
+        .sidebar-nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background-color: transparent;
+        }
+
+        .lesson-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .lesson-item {
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .lesson-item:hover {
+            background-color: #e6f2ff;
+        }
+        .lesson-item.completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .lesson-item.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .lesson-title-text {
+            font-weight: 500;
+            display: block;
+        }
+        .lesson-duration {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .lesson-item.active .lesson-duration {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .notes-editor textarea {
+            height: 150px;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .notes-editor button {
+            border-radius: 8px;
+        }
+
+        .qna-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .qna-item:last-child {
+            border-bottom: none;
+        }
+        .qna-question {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .qna-answer {
+            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+
+        .downloads-list {
+            list-style: none;
+            padding: 0;
+        }
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .download-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .player-footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+        .footer-controls button {
+            background-color: #495057;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+        .footer-controls button:hover {
+            background-color: var(--primary-color);
+        }
+        .footer-controls button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .mark-complete-btn {
+            background-color: var(--success-color);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        .mark-complete-btn:hover {
+            background-color: #048a50;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .course-player-container {
+                flex-direction: column;
+            }
+            .sidebar-player {
+                width: 100%;
+                height: auto;
+                order: -1; /* Place sidebar above main content in mobile */
+                box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            }
+            .main-player-area {
+                border-top: 1px solid #e9ecef;
+            }
+            .video-player-wrapper {
+                position: relative;
+                top: auto;
+            }
+            .player-footer {
+                padding: 15px;
+            }
+        }
+        @media (max-width: 767px) {
+            .header-player .d-flex {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .header-player .navbar-brand {
+                margin-bottom: 10px;
+            }
+            .header-player .progress-bar-custom {
+                width: 100% !important;
+            }
+            .lesson-content, .lesson-quiz {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header-player">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand me-auto" href="courses.html">
+                <img src="https://via.placeholder.com/120x35.png?text=PsyClinic" alt="PsyClinic Logo" height="30">
+            </a>
+            <div class="d-flex flex-grow-1 align-items-center gap-3">
+                <h5 class="mb-0 text-truncate" style="max-width: 300px;">مدیریت اضطراب برای مبتدیان</h5>
+                <div class="progress-bar-custom flex-grow-1">
+                    <div class="progress-bar-fill" style="width: 25%;" id="courseProgressBar"></div>
+                </div>
+                <span class="small text-muted" id="courseProgressText">۲۵%</span>
+            </div>
+            <div class="ms-3 d-flex align-items-center gap-2">
+                <span class="small">علی رضایی</span>
+                <img src="https://via.placeholder.com/30x30.png?text=User" alt="آواتار" class="rounded-circle">
+                <a href="client-dashboard.html" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-person me-1"></i>پنل
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="course-player-container">
+        <!-- Main Player Area -->
+        <div class="main-player-area" data-simplebar>
+            <!-- Video Player -->
+            <div class="video-player-wrapper">
+                <iframe id="videoPlayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" allowfullscreen></iframe>
+            </div>
+
+            <!-- Lesson Content -->
+            <div class="lesson-content">
+                <h1 class="mb-4">درس ۱: مقدمه و مفاهیم پایه</h1>
+                <p class="lead">
+                    در این درس، با مفهوم اضطراب، انواع آن و چگونگی تأثیر آن بر زندگی روزمره آشنا می‌شویم.
+                </p>
+                <p>
+                    اضطراب یک واکنش طبیعی بدن به استرس است و در برخی شرایط، مفید هم هست. اما زمانی که این احساس نگرانی شدید و مداوم شود و بر عملکرد روزانه فرد تأثیر بگذارد، ممکن است به یک اختلال اضطرابی تبدیل شود. ما در این دوره به صورت عمیق به این موضوع خواهیم پرداخت.
+                </p>
+                
+                <h2>انواع اضطراب</h2>
+                <p>
+                    اضطراب می‌تواند به شکل‌های مختلفی ظاهر شود، از جمله اضطراب عمومی (GAD)، اختلال هراس (Panic Disorder)، اضطراب اجتماعی (Social Anxiety Disorder) و وسواس فکری-عملی (OCD). هر یک از این اختلالات ویژگی‌های خاص خود را دارند و نیازمند رویکردهای درمانی متفاوتی هستند.
+                </p>
+                <img src="https://images.unsplash.com/photo-1544365313-097c21626274?auto=format&fit=crop&w=800&q=80" alt="انواع اضطراب" class="img-fluid rounded my-4">
+                
+                <h3>تأثیر اضطراب بر سلامت جسمانی</h3>
+                <p>
+                    اضطراب نه تنها بر سلامت روان، بلکه بر سلامت جسمانی نیز تأثیر می‌گذارد. علائمی مانند تپش قلب، سردرد، مشکلات گوارشی، بی‌خوابی و خستگی مزمن می‌توانند نشانه‌های فیزیکی اضطراب باشند. مدیریت مؤثر اضطراب می‌تواند به بهبود هر دو جنبه سلامت کمک کند.
+                </p>
+
+                <!-- Quiz Section (Conditional Display) -->
+                <div class="lesson-quiz mt-5 p-4 rounded" id="lessonQuizSection">
+                    <h4 class="mb-3">ارزیابی درس</h4>
+                    <form id="quizForm">
+                        <div class="mb-3">
+                            <p><strong>سوال ۱:</strong> کدام یک از موارد زیر نشان‌دهنده واکنش طبیعی به استرس است؟</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1a1" value="a">
+                                <label class="form-check-label" for="q1a1">الف) تپش قلب شدید و دائمی</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1a2" value="b">
+                                <label class="form-check-label" for="q1a2">ب) احساس نگرانی موقت قبل از یک امتحان</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="q1" id="q1a3" value="c">
+                                <label class="form-check-label" for="q1a3">ج) پرهیز کامل از موقعیت‌های اجتماعی</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">ثبت پاسخ</button>
+                    </form>
+                    <div id="quizResult" class="mt-3" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Player -->
+        <div class="sidebar-player">
+            <ul class="nav nav-tabs sidebar-nav-tabs mb-3" id="sidebarTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="lessons-tab" data-bs-toggle="tab" data-bs-target="#lessons" type="button" role="tab" aria-controls="lessons" aria-selected="true">
+                        <i class="bi bi-list-ol me-1"></i>دروس
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="qna-tab" data-bs-toggle="tab" data-bs-target="#qna" type="button" role="tab" aria-controls="qna" aria-selected="false">
+                        <i class="bi bi-question-circle me-1"></i>پرسش و پاسخ
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab" aria-controls="notes" aria-selected="false">
+                        <i class="bi bi-journal-text me-1"></i>یادداشت‌ها
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="downloads-tab" data-bs-toggle="tab" data-bs-target="#downloads" type="button" role="tab" aria-controls="downloads" aria-selected="false">
+                        <i class="bi bi-download me-1"></i>دانلودها
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content flex-grow-1" data-simplebar>
+                <!-- Lessons Tab -->
+                <div class="tab-pane fade show active" id="lessons" role="tabpanel" aria-labelledby="lessons-tab">
+                    <ul class="lesson-list">
+                        <li class="lesson-item completed" data-lesson-id="1">
+                            <div>
+                                <span class="lesson-title-text"><i class="bi bi-check-circle-fill text-success me-2"></i>درس ۱: مقدمه و مفاهیم پایه</span>
+                                <span class="lesson-duration">۴۵ دقیقه</span>
+                            </div>
+                            <i class="bi bi-play-circle-fill text-success"></i>
+                        </li>
+                        <li class="lesson-item active" data-lesson-id="2">
+                            <div>
+                                <span class="lesson-title-text"><i class="bi bi-play-circle-fill me-2"></i>درس ۲: تکنیک‌های تنفس</span>
+                                <span class="lesson-duration">۳۰ دقیقه</span>
+                            </div>
+                            <i class="bi bi-arrow-right-circle-fill"></i>
+                        </li>
+                        <li class="lesson-item" data-lesson-id="3">
+                            <div>
+                                <span class="lesson-title-text"><i class="bi bi-lock-fill me-2"></i>درس ۳: مدیتیشن برای آرامش</span>
+                                <span class="lesson-duration">۲۰ دقیقه</span>
+                            </div>
+                            <i class="bi bi-arrow-right-circle"></i>
+                        </li>
+                        <li class="lesson-item" data-lesson-id="4">
+                            <div>
+                                <span class="lesson-title-text"><i class="bi bi-lock-fill me-2"></i>درس ۴: شناخت‌درمانی (CBT)</span>
+                                <span class="lesson-duration">۶۰ دقیقه</span>
+                            </div>
+                            <i class="bi bi-arrow-right-circle"></i>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Q&A Tab -->
+                <div class="tab-pane fade" id="qna" role="tabpanel" aria-labelledby="qna-tab">
+                    <div class="qna-item">
+                        <div class="qna-question">
+                            <i class="bi bi-question-circle me-1"></i>
+                            چگونه می‌توانم اضطراب خود را در موقعیت‌های اجتماعی کنترل کنم؟
+                        </div>
+                        <div class="qna-answer">
+                            <i class="bi bi-chat-dots me-1"></i>
+                            پاسخ مدرس: با استفاده از تکنیک‌های ذهن‌آگاهی و تمرین‌های نقش‌آفرینی می‌توانید به تدریج بر این مشکل غلبه کنید.
+                        </div>
+                    </div>
+                    <div class="qna-item">
+                        <div class="qna-question">
+                            <i class="bi bi-question-circle me-1"></i>
+                            آیا این دوره گواهینامه پایان دوره دارد؟
+                        </div>
+                        <div class="qna-answer">
+                            <i class="bi bi-chat-dots me-1"></i>
+                            پاسخ مدرس: بله، پس از تکمیل تمام دروس و گذراندن آزمون نهایی، گواهینامه دیجیتال برای شما صادر خواهد شد.
+                        </div>
+                    </div>
+                    <form class="mt-3">
+                        <textarea class="form-control mb-2" rows="3" placeholder="سوال خود را مطرح کنید..."></textarea>
+                        <button class="btn btn-primary w-100">ارسال سوال</button>
+                    </form>
+                </div>
+
+                <!-- Notes Tab -->
+                <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+                    <div class="notes-editor">
+                        <textarea class="form-control mb-2" placeholder="یادداشت‌های خود را اینجا بنویسید..." id="notesTextarea"></textarea>
+                        <button class="btn btn-success w-100" id="saveNotesBtn">ذخیره یادداشت‌ها</button>
+                    </div>
+                </div>
+
+                <!-- Downloads Tab -->
+                <div class="tab-pane fade" id="downloads" role="tabpanel" aria-labelledby="downloads-tab">
+                    <ul class="downloads-list">
+                        <li class="download-item">
+                            <span><i class="bi bi-file-earmark-arrow-down me-1"></i>اسلایدهای درس ۱</span>
+                            <a href="#" target="_blank" download>دانلود (PDF)</a>
+                        </li>
+                        <li class="download-item">
+                            <span><i class="bi bi-file-earmark-arrow-down me-1"></i>تمرین‌های عملی درس ۱</span>
+                            <a href="#" target="_blank" download>دانلود (DOCX)</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYER FOOTER -->
+    <footer class="player-footer">
+        <div class="footer-controls d-flex gap-3">
+            <button id="prevLessonBtn" disabled><i class="bi bi-chevron-right"></i></button>
+            <button id="nextLessonBtn"><i class="bi bi-chevron-left"></i></button>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-secondary mark-complete-btn" id="markCompleteBtn">
+                <i class="bi bi-check-circle me-1"></i>تکمیل درس
+            </button>
+            <a href="client-dashboard.html" class="btn btn-outline-light">
+                <i class="bi bi-box-arrow-right me-1"></i>بازگشت به پنل
+            </a>
+            <button class="btn btn-outline-light" id="certificateBtn" style="display: none;">
+                <i class="bi bi-award me-1"></i>گواهینامه
+            </button>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.6/dist/simplebar.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({once:true,duration:700});</script>
+
+    <!-- Custom JavaScript for Course Player -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const videoPlayer = document.getElementById('videoPlayer');
+            const courseProgressBar = document.getElementById('courseProgressBar');
+            const courseProgressText = document.getElementById('courseProgressText');
+            const lessonsList = document.querySelector('.lesson-list');
+            const markCompleteBtn = document.getElementById('markCompleteBtn');
+            const prevLessonBtn = document.getElementById('prevLessonBtn');
+            const nextLessonBtn = document.getElementById('nextLessonBtn');
+            const certificateBtn = document.getElementById('certificateBtn');
+            const notesTextarea = document.getElementById('notesTextarea');
+            const saveNotesBtn = document.getElementById('saveNotesBtn');
+            const quizForm = document.getElementById('quizForm');
+            const quizResult = document.getElementById('quizResult');
+            const lessonQuizSection = document.getElementById('lessonQuizSection');
+
+            // Course Data (Simulated - in real app, fetched from API)
+            const courseData = {
+                id: 101,
+                title: "مدیریت اضطراب برای مبتدیان",
+                instructor: "دکتر مریم احمدی",
+                totalLessons: 4,
+                lessons: [
+                    { id: 1, title: "مقدمه و مفاهیم پایه", duration: "۴۵ دقیقه", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+                    { id: 2, title: "تکنیک‌های تنفس", duration: "۳۰ دقیقه", videoUrl: "https://www.youtube.com/embed/q_GfF4M9sCg" },
+                    { id: 3, title: "مدیتیشن برای آرامش", duration: "۲۰ دقیقه", videoUrl: "https://www.youtube.com/embed/j7d5DgV7v_E" },
+                    { id: 4, title: "شناخت‌درمانی (CBT)", duration: "۶۰ دقیقه", videoUrl: "https://www.youtube.com/embed/j7d5DgV7v_E" }
+                ],
+                quizzes: {
+                    1: {
+                        question: "کدام یک از موارد زیر نشان‌دهنده واکنش طبیعی به استرس است؟",
+                        options: [
+                            "الف) تپش قلب شدید و دائمی",
+                            "ب) احساس نگرانی موقت قبل از یک امتحان",
+                            "ج) پرهیز کامل از موقعیت‌های اجتماعی"
+                        ],
+                        correctAnswer: "b"
+                    }
+                }
+            };
+
+            // User Progress (Simulated - in real app, fetched from API/localStorage)
+            let userProgress = {
+                completedLessons: [1],
+                currentLessonId: 2,
+                notes: localStorage.getItem('course101_notes') || ''
+            };
+
+            // --- Functions ---
+            function loadLesson(lessonId) {
+                const lesson = courseData.lessons.find(l => l.id === lessonId);
+                if (!lesson) {
+                    console.error("Lesson not found:", lessonId);
+                    return;
+                }
+
+                // Update URL (for direct linking)
+                history.pushState(null, '', `course-player.html?course=${courseData.id}&lesson=${lessonId}`);
+
+                // Update video player
+                videoPlayer.src = lesson.videoUrl;
+
+                // Update lesson content (for demo, this is static. In real app, fetch lesson.textContent from API)
+                document.querySelector('.lesson-content h1').textContent = `درس ${lesson.id}: ${lesson.title}`;
+                // Hide quiz if not applicable for this lesson
+                lessonQuizSection.style.display = courseData.quizzes[lesson.id] ? 'block' : 'none';
+                if (courseData.quizzes[lesson.id]) {
+                    document.querySelector('#lessonQuizSection p').textContent = courseData.quizzes[lesson.id].question;
+                    // Dynamically set quiz options (simplified)
+                    document.querySelectorAll('input[name="q1"] + label').forEach((label, i) => {
+                        label.textContent = courseData.quizzes[lesson.id].options[i];
+                    });
+                }
+                
+                // Update active lesson in sidebar
+                document.querySelectorAll('.lesson-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (parseInt(item.dataset.lessonId) === lessonId) {
+                        item.classList.add('active');
+                    }
+                });
+
+                // Update progress bar
+                updateProgressBar();
+
+                // Update navigation buttons
+                updateNavButtons(lessonId);
+
+                userProgress.currentLessonId = lessonId;
+            }
+
+            function updateProgressBar() {
+                const completedCount = userProgress.completedLessons.length;
+                const totalLessons = courseData.lessons.length;
+                const percentage = Math.round((completedCount / totalLessons) * 100);
+                courseProgressBar.style.width = `${percentage}%`;
+                courseProgressText.textContent = `${percentage}%`;
+
+                // Show certificate button if 100%
+                if (percentage === 100) {
+                    certificateBtn.style.display = 'inline-block';
+                }
+            }
+
+            function updateNavButtons(currentLessonId) {
+                prevLessonBtn.disabled = currentLessonId === 1;
+                nextLessonBtn.disabled = currentLessonId === courseData.lessons.length;
+
+                markCompleteBtn.disabled = userProgress.completedLessons.includes(currentLessonId);
+                if (markCompleteBtn.disabled) {
+                    markCompleteBtn.textContent = 'درس تکمیل شد';
+                } else {
+                    markCompleteBtn.textContent = 'تکمیل درس';
+                }
+            }
+
+            function markLessonComplete() {
+                const currentLessonId = userProgress.currentLessonId;
+                if (!userProgress.completedLessons.includes(currentLessonId)) {
+                    userProgress.completedLessons.push(currentLessonId);
+                    // Sort to keep order
+                    userProgress.completedLessons.sort((a, b) => a - b);
+                    showToast(`درس ${currentLessonId} با موفقیت تکمیل شد!`);
+
+                    // Update UI
+                    document.querySelector(`.lesson-item[data-lesson-id="${currentLessonId}"]`).classList.add('completed');
+                    updateProgressBar();
+                    updateNavButtons(currentLessonId);
+
+                    // Auto-advance to next lesson if not last
+                    if (currentLessonId < courseData.lessons.length) {
+                        setTimeout(() => loadLesson(currentLessonId + 1), 1500);
+                    }
+                } else {
+                    showToast('این درس قبلاً تکمیل شده است.');
+                }
+            }
+
+            function navigateLessons(direction) { // direction: -1 for prev, 1 for next
+                const currentLessonId = userProgress.currentLessonId;
+                const newLessonId = currentLessonId + direction;
+                if (newLessonId >= 1 && newLessonId <= courseData.lessons.length) {
+                    loadLesson(newLessonId);
+                }
+            }
+
+            function saveNotes() {
+                userProgress.notes = notesTextarea.value;
+                localStorage.setItem('course101_notes', notesTextarea.value); // Simulate saving
+                showToast('یادداشت‌ها ذخیره شد!');
+            }
+
+            function submitQuiz(e) {
+                e.preventDefault();
+                const selectedOption = document.querySelector('input[name="q1"]:checked');
+                if (!selectedOption) {
+                    alert('لطفاً یک گزینه را انتخاب کنید.');
+                    return;
+                }
+                const isCorrect = selectedOption.value === courseData.quizzes[userProgress.currentLessonId].correctAnswer;
+                
+                quizResult.style.display = 'block';
+                if (isCorrect) {
+                    quizResult.className = 'mt-3 alert alert-success';
+                    quizResult.textContent = 'پاسخ شما صحیح است! به درس بعدی بروید.';
+                } else {
+                    quizResult.className = 'mt-3 alert alert-danger';
+                    quizResult.textContent = 'پاسخ شما نادرست است. لطفاً دوباره تلاش کنید.';
+                }
+
+                // In a real app, logic for retries or unlocking next lesson
+            }
+
+            function showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'position-fixed bottom-0 end-0 m-3 p-3 rounded bg-dark text-white';
+                toast.style.zIndex = 9999;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2500);
+            }
+
+            // --- Event Listeners ---
+            markCompleteBtn.addEventListener('click', markLessonComplete);
+            prevLessonBtn.addEventListener('click', () => navigateLessons(-1));
+            nextLessonBtn.addEventListener('click', () => navigateLessons(1));
+            saveNotesBtn.addEventListener('click', saveNotes);
+            if (quizForm) quizForm.addEventListener('submit', submitQuiz);
+
+            // Click on lesson items in sidebar
+            lessonsList.addEventListener('click', function(e) {
+                const lessonItem = e.target.closest('.lesson-item');
+                if (lessonItem) {
+                    const lessonId = parseInt(lessonItem.dataset.lessonId);
+                    if (userProgress.completedLessons.includes(lessonId) || lessonId <= userProgress.completedLessons.length + 1) { // Allow accessing completed and next lesson
+                         loadLesson(lessonId);
+                    } else {
+                         showToast('لطفاً دروس قبلی را تکمیل کنید.');
+                    }
+                }
+            });
+
+            // Initial load of lesson
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialLessonId = parseInt(urlParams.get('lesson')) || userProgress.currentLessonId;
+            loadLesson(initialLessonId);
+
+            // Load notes from simulated storage
+            notesTextarea.value = userProgress.notes;
+        });
+    </script>
+</body>
+</html>

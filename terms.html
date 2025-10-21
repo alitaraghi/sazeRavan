@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرایط و قوانین - PsyClinic</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="شرایط و قوانین استفاده از خدمات PsyClinic">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4cc9f0;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(76, 201, 240, 0.05)),
+                        url('https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .content-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section p {
+            line-height: 1.8;
+            color: #495057;
+        }
+        
+        .content-section ul {
+            padding-right: 20px;
+        }
+        
+        .content-section li {
+            margin-bottom: 10px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .toc {
+            background: #f1f5f9;
+            border-radius: 15px;
+            padding: 20px;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .toc-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .toc-list a {
+            color: #495057;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-list a:hover, .toc-list a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: auto;
+                padding: 60px 0;
+            }
+            .toc {
+                position: static;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="sticky-top bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">خانه</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">وبلاگ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="courses.html">دوره‌ها</a></li>
+                        <li class="nav-item"><a class="nav-link" href="psychologists.html">مشاوران</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="terms.html">شرایط و قوانین</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary me-2">ورود</a>
+                        <a href="register.html" class="btn btn-primary">ثبت‌نام</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-3 fw-bold mb-4" data-aos="fade-up">شرایط و قوانین</h1>
+                    <p class="lead mb-0" data-aos="fade-up" data-aos-delay="200">
+                        استفاده از خدمات PsyClinic به معنای پذیرش تمامی شرایط و قوانین ذکر شده در این صفحه است
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Table of Contents (TOC) -->
+            <div class="col-lg-4">
+                <div class="toc" data-aos="fade-left">
+                    <h4 class="toc-title">فهرست مطالب</h4>
+                    <ul class="toc-list" id="tocList">
+                        <li><a href="#section1">مقدمه</a></li>
+                        <li><a href="#section2">تعاریف</a></li>
+                        <li><a href="#section3">حساب کاربری</a></li>
+                        <li><a href="#section4">تعهدات کاربران</a></li>
+                        <li><a href="#section5">تعهدات PsyClinic</a></li>
+                        <li><a href="#section6">حقوق مالکیت معنوی</a></li>
+                        <li><a href="#section7">لغو و بازپرداخت</a></li>
+                        <li><a href="#section8">حل اختلاف</a></li>
+                        <li><a href="#section9">تغییرات در شرایط</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="col-lg-8">
+                <div class="content-section" data-aos="fade-up">
+                    <h2 id="section1">مقدمه</h2>
+                    <p>
+                        این توافق‌نامه، شرایط و قوانینی را که بر اساس آن PsyClinic خدمات خود را ارائه می‌دهد، مشخص می‌کند. 
+                        هرگونه استفاده از این پلتفرم به معنای پذیرش کامل این شرایط است.
+                    </p>
+
+                    <h3 id="section2">تعاریف</h3>
+                    <p>
+                        <strong>PsyClinic:</strong> کلینیک مجازی روانشناسی آنلاین.<br>
+                        <strong>کاربر:</strong> هر فردی که از خدمات PsyClinic استفاده می‌کند.<br>
+                        <strong>مشاور:</strong> روانشناس یا مشاور حرفه‌ای که از طریق PsyClinic خدمات ارائه می‌دهد.<br>
+                        <strong>محتوا:</strong> هرگونه متن، تصویر، ویدیو، صوت یا اطلاعاتی که در PsyClinic منتشر می‌شود.
+                    </p>
+
+                    <h3 id="section3">حساب کاربری</h3>
+                    <p>
+                        برای استفاده از خدمات PsyClinic، باید یک حساب کاربری ایجاد کنید. 
+                        شما مسئول حفظ امنیت حساب کاربری خود هستید و باید اطلاعات دقیق و به‌روز ارائه دهید.
+                    </p>
+
+                    <h3 id="section4">تعهدات کاربران</h3>
+                    <ul>
+                        <li>استفاده از خدمات PsyClinic برای اهداف قانونی و اخلاقی.</li>
+                        <li>عدم به اشتراک‌گذاری اطلاعات حساب کاربری با دیگران.</li>
+                        <li>عدم انتشار محتوای توهین‌آمیز، غیرقانونی یا مخرب.</li>
+                        <li>احترام به حریم خصوصی مشاوران و سایر کاربران.</li>
+                    </ul>
+
+                    <h3 id="section5">تعهدات PsyClinic</h3>
+                    <ul>
+                        <li>حفظ حریم خصوصی کاربران و اطلاعات آن‌ها.</li>
+                        <li>ارائه خدمات با کیفیت و حرفه‌ای.</li>
+                        <li>پشتیبانی از کاربران در صورت بروز مشکلات فنی.</li>
+                        <li>بررسی صلاحیت مشاوران قبل از شروع به کار.</li>
+                    </ul>
+
+                    <h3 id="section6">حقوق مالکیت معنوی</h3>
+                    <p>
+                        تمام محتوای تولید شده توسط PsyClinic (مقالات، ویدیوها، دوره‌ها) متعلق به این پلتفرم است و هرگونه استفاده غیرمجاز از آن پیگرد قانونی دارد.
+                    </p>
+
+                    <h3 id="section7">لغو و بازپرداخت</h3>
+                    <p>
+                        کاربران می‌توانند تا ۲۴ ساعت قبل از جلسه، وقت خود را لغو و هزینه را به صورت کامل دریافت کنند. 
+                        در صورت لغو کمتر از ۲۴ ساعت، ۵۰٪ هزینه بازپرداخت خواهد شد.
+                    </p>
+
+                    <h3 id="section8">حل اختلاف</h3>
+                    <p>
+                        در صورت بروز هرگونه اختلاف، PsyClinic تلاش می‌کند تا از طریق مذاکره و میانجی‌گری به راه‌حل مناسب دست یابد. 
+                        در صورت عدم توافق، مرجع قضایی صالح در تهران، مرجع رسیدگی به اختلافات خواهد بود.
+                    </p>
+
+                    <h3 id="section9">تغییرات در شرایط</h3>
+                    <p>
+                        PsyClinic حق دارد در هر زمان شرایط و قوانین را تغییر دهد. 
+                        نسخه جدید شرایط از طریق ایمیل به کاربران اطلاع‌رسانی خواهد شد و ادامه استفاده از خدمات به معنای پذیرش شرایط جدید است.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-3 fw-bold mb-4" data-aos="fade-up">آماده‌اید با یک مشاور حرفه‌ای صحبت کنید؟</h2>
+            <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">
+                همین حالا وقت خود را رزرو کنید و اولین گام را به سوی سلامت روان بردارید
+            </p>
+            <a href="booking.html" class="btn btn-light btn-lg" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-calendar-check me-2"></i>رزرو وقت مشاوره
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li><a href="courses.html" class="text-white-50">دوره‌ها</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                        <li><a href="terms.html" class="text-white-50">شرایط و قوانین</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک</li>
+                        <li><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-list a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Highlight TOC link on scroll
+        const sections = document.querySelectorAll('.content-section h2');
+        const tocLinks = document.querySelectorAll('.toc-list a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>پنل ادمین - PsyClinic</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- فونت فارسی Vazirmatn -->
+  <link href="https://v1.fontapi.ir/css/Vazirmatn" rel="stylesheet">
+  
+  <!-- استایل سراسری پروژه -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <style>
+    /* استایل‌های اختصاصی پنل ادمین (مکمل main.css) */
+    :root {
+      --sidebar-width: 260px;
+      --header-height: 70px;
+    }
+
+    body {
+      background-color: var(--light-color);
+    }
+
+    /* هدر ادمین */
+    .admin-header {
+      height: var(--header-height);
+      background: var(--white-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1020;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+
+    /* سایدبار */
+    .admin-sidebar {
+      width: var(--sidebar-width);
+      height: calc(100vh - var(--header-height));
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      background: var(--white-color);
+      border-right: 1px solid var(--gray-200);
+      overflow-y: auto;
+      padding-top: 1rem;
+    }
+
+    .sidebar-nav .nav-link {
+      color: var(--dark-color);
+      padding: 0.75rem 1.5rem;
+      margin-bottom: 4px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-nav .nav-link:hover,
+    .sidebar-nav .nav-link.active {
+      background-color: rgba(108, 99, 255, 0.1);
+      color: var(--primary-color);
+    }
+
+    .sidebar-nav .nav-link i {
+      margin-left: 0.75rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* محتوای اصلی */
+    .admin-main {
+      margin-right: var(--sidebar-width);
+      margin-top: var(--header-height);
+      padding: 1.5rem;
+    }
+
+    /* کارت‌های آمار */
+    .stat-card {
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 1.25rem;
+      background: var(--white-color);
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+    }
+
+    /* وضعیت‌ها */
+    .status-active { color: var(--success-color); font-weight: 600; }
+    .status-inactive { color: var(--danger-color); }
+    .priority-high { color: var(--danger-color); font-weight: 600; }
+    .priority-medium { color: var(--warning-color); }
+    .priority-low { color: var(--gray-200); }
+
+    /* دکمه‌های FAB */
+    .fab-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .fab-btn {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+    }
+
+    /* ریسپانسیو */
+    @media (max-width: 991.98px) {
+      .admin-sidebar { width: 70px; }
+      .admin-sidebar .nav-link span { display: none; }
+      .admin-main { margin-right: 70px; }
+    }
+
+    @media (max-width: 767.98px) {
+      .admin-sidebar { display: none; }
+      .admin-main { margin-right: 0; }
+      .fab-container { bottom: 1.5rem; right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- هدر ادمین -->
+  <header class="admin-header">
+    <h1 class="h5 fw-bold text-primary">پنل مدیریت PsyClinic</h1>
+    <div class="d-flex align-items-center gap-3">
+      <span class="d-none d-sm-inline">مدیر کل</span>
+      <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-weight: bold;">
+        م
+      </div>
+    </div>
+  </header>
+
+  <!-- سایدبار -->
+  <aside class="admin-sidebar">
+    <ul class="nav flex-column sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="#" onclick="loadSection('dashboard')">
+          <i class="bi bi-house-door"></i> <span>仪表板</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadSection('users')">
+          <i class="bi bi-people"></i> <span>مدیریت کاربران</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadSection('content')">
+          <i class="bi bi-file-earmark-text"></i> <span>مدیریت محتوا</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadSection('reports')">
+          <i class="bi bi-bar-chart"></i> <span>گزارش‌ها</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadSection('finances')">
+          <i class="bi bi-wallet2"></i> <span>مالی</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadSection('support')">
+          <i class="bi bi-headset"></i> <span>پشتیبانی</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadSection('settings')">
+          <i class="bi bi-gear"></i> <span>تنظیمات</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadSection('logs')">
+          <i class="bi bi-list"></i> <span>لاگ‌ها</span>
+        </a>
+      </li>
+      <li class="nav-item mt-4">
+        <a class="nav-link text-danger" href="#" onclick="logout()">
+          <i class="bi bi-box-arrow-right"></i> <span>خروج</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- محتوای اصلی -->
+  <main class="admin-main" id="main-content">
+
+    <!-- Dashboard -->
+    <div id="dashboard-section">
+      <h2 class="h4 mb-4 fw-bold">仪表板</h2>
+      <div class="row g-4 mb-5">
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card border-start border-4 border-primary">
+            <div class="text-muted">کاربران فعال</div>
+            <div class="stat-value text-primary">1,245</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card border-start border-4 border-success">
+            <div class="text-muted">محتوای منتشر شده</div>
+            <div class="stat-value text-success">328</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card border-start border-4 border-danger">
+            <div class="text-muted">تیکت‌های باز</div>
+            <div class="stat-value text-danger">12</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="stat-card border-start border-4 border-warning">
+            <div class="text-muted">درآمد ماه جاری</div>
+            <div class="stat-value text-warning">28,000,000 تومان</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="h5 mb-3">فعالیت‌های اخیر</h3>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>کاربر</th>
+              <th>فعالیت</th>
+              <th>تاریخ</th>
+              <th>وضعیت</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>علی رضایی</td><td>ورود به سیستم</td><td>15 خرداد 1403</td><td class="status-active">موفق</td></tr>
+            <tr><td>دکتر مریم احمدی</td><td>انتشار مقاله جدید</td><td>14 خرداد 1403</td><td class="status-active">موفق</td></tr>
+            <tr><td>کاربر 123</td><td>ایجاد تیکت پشتیبانی</td><td>14 خرداد 1403</td><td class="priority-high">فوری</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- مدیریت کاربران -->
+    <div id="users-section" style="display:none;">
+      <h2 class="h4 mb-4 fw-bold">مدیریت کاربران</h2>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>نام</th>
+              <th>ایمیل</th>
+              <th>نقش</th>
+              <th>وضعیت</th>
+              <th>تاریخ عضویت</th>
+              <th>آخرین فعالیت</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>علی رضایی</td><td>ali@example.com</td><td>کاربر</td><td class="status-active">فعال</td><td>15 دی 1402</td><td>15 خرداد 1403</td></tr>
+            <tr><td>دکتر مریم احمدی</td><td>dr.ahmadi@psyclinic.ir</td><td>روانشناس</td><td class="status-active">فعال</td><td>20 اردیبهشت 1402</td><td>15 خرداد 1403</td></tr>
+            <tr><td>سارا محمدی</td><td>sara.m@example.com</td><td>کاربر</td><td class="status-inactive">غیرفعال</td><td>5 اسفند 1402</td><td>20 اردیبهشت 1403</td></tr>
+            <tr><td>دکتر رضا نوری</td><td>dr.noori@psyclinic.ir</td><td>روانشناس</td><td class="status-active">فعال</td><td>10 بهمن 1401</td><td>14 خرداد 1403</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- مدیریت محتوا -->
+    <div id="content-section" style="display:none;">
+      <h2 class="h4 mb-4 fw-bold">مدیریت محتوا</h2>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>عنوان</th>
+              <th>نوع</th>
+              <th>نویسنده</th>
+              <th>وضعیت</th>
+              <th>تاریخ انتشار</th>
+              <th>بازدید</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>چگونه با اضطراب کنار بیاییم؟</td><td>وبلاگ</td><td>دکتر مریم احمدی</td><td class="status-active">منتشر شده</td><td>1 خرداد 1403</td><td>1,245</td></tr>
+            <tr><td>مدیریت اضطراب برای مبتدیان</td><td>دوره</td><td>دکتر مریم احمدی</td><td class="status-active">فعال</td><td>10 اردیبهشت 1403</td><td>25 دانشجو</td></tr>
+            <tr><td>تکنیک‌های تنفسی</td><td>ویدیو</td><td>دکتر رضا نوری</td><td class="status-inactive">پیش‌نویس</td><td>—</td><td>0</td></tr>
+            <tr><td>تأثیر خواب بر سلامت روان</td><td>مقاله</td><td>دکتر مریم احمدی</td><td class="status-active">منتشر شده</td><td>20 اردیبهشت 1403</td><td>890</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- گزارش‌ها -->
+    <div id="reports-section" style="display:none;">
+      <h2 class="h4 mb-4 fw-bold">گزارش‌ها</h2>
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="text-muted">رشد کاربران (ماه جاری)</div>
+            <div class="stat-value text-primary">+18%</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="text-muted">میانگین جلسات ماهانه</div>
+            <div class="stat-value">420</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="text-muted">درآمد ماه گذشته</div>
+            <div class="stat-value text-warning">25,500,000 تومان</div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>نوع گزارش</th>
+              <th>بازه زمانی</th>
+              <th>وضعیت</th>
+              <th>دانلود</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>گزارش مالی ماهانه</td><td>خرداد 1403</td><td class="status-active">آماده</td><td><i class="bi bi-download text-primary"></i></td></tr>
+            <tr><td>گزارش فعالیت کاربران</td><td>فروردین–خرداد 1403</td><td class="status-active">آماده</td><td><i class="bi bi-download text-primary"></i></td></tr>
+            <tr><td>گزارش عملکرد روانشناسان</td><td>سال جاری</td><td class="status-inactive">در حال پردازش</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- مالی -->
+    <div id="finances-section" style="display:none;">
+      <h2 class="h4 mb-4 fw-bold">مالی</h2>
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="text-muted">درآمد کل</div>
+            <div class="stat-value text-warning">125,000,000 تومان</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="text-muted">تراکنش‌های موفق</div>
+            <div class="stat-value text-success">1,024</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card">
+            <div class="text-muted">تراکنش‌های ناموفق</div>
+            <div class="stat-value text-danger">32</div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>تاریخ</th>
+              <th>کاربر</th>
+              <th>مبلغ</th>
+              <th>نوع</th>
+              <th>وضعیت</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>15 خرداد 1403</td><td>علی رضایی</td><td>150,000 تومان</td><td>پرداخت جلسه</td><td class="status-active">موفق</td></tr>
+            <tr><td>14 خرداد 1403</td><td>سارا محمدی</td><td>2,500,000 تومان</td><td>خرید دوره</td><td class="status-active">موفق</td></tr>
+            <tr><td>13 خرداد 1403</td><td>کاربر ناشناس</td><td>150,000 تومان</td><td>پرداخت جلسه</td><td class="status-inactive">ناموفق</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- پشتیبانی -->
+    <div id="support-section" style="display:none;">
+      <h2 class="h4 mb-4 fw-bold">پشتیبانی</h2>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>شماره تیکت</th>
+              <th>موضوع</th>
+              <th>کاربر</th>
+              <th>اولویت</th>
+              <th>وضعیت</th>
+              <th>تاریخ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>#901</td><td>مشکل در ورود به حساب کاربری</td><td>کاربر 123</td><td class="priority-high">بالا</td><td class="status-inactive">باز</td><td>14 خرداد 1403</td></tr>
+            <tr><td>#902</td><td>درخواست بازگشت وجه</td><td>سارا محمدی</td><td class="priority-medium">متوسط</td><td class="status-active">در حال بررسی</td><td>13 خرداد 1403</td></tr>
+            <tr><td>#900</td><td>سوال درباره دوره اضطراب</td><td>علی رضایی</td><td class="priority-low">پایین</td><td class="status-active">پاسخ داده شد</td><td>10 خرداد 1403</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- تنظیمات -->
+    <div id="settings-section" style="display:none;">
+      <h2 class="h4 mb-4 fw-bold">تنظیمات</h2>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>تنظیم</th>
+              <th>مقدار فعلی</th>
+              <th>وضعیت</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>نام سایت</td><td>PsyClinic</td><td class="status-active">فعال</td></tr>
+            <tr><td>درگاه پرداخت</td><td>زرین‌پال</td><td class="status-active">فعال</td></tr>
+            <tr><td>احراز هویت دو مرحله‌ای</td><td>غیرفعال</td><td class="status-inactive">غیرفعال</td></tr>
+            <tr><td>محدودیت IP ادمین</td><td>غیرفعال</td><td class="status-inactive">غیرفعال</td></tr>
+            <tr><td>آدرس ایمیل پشتیبانی</td><td>support@psyclinic.ir</td><td class="status-active">فعال</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- لاگ‌ها -->
+    <div id="logs-section" style="display:none;">
+      <h2 class="h4 mb-4 fw-bold">لاگ‌های سیستم</h2>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>تاریخ و زمان</th>
+              <th>کاربر</th>
+              <th>عملیات</th>
+              <th>IP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>15 خرداد 1403 - 10:30</td><td>علی رضایی</td><td>ورود موفق</td><td>192.168.1.105</td></tr>
+            <tr><td>15 خرداد 1403 - 09:15</td><td>مدیر کل</td><td>حذف کاربر غیرفعال</td><td>203.0.113.42</td></tr>
+            <tr><td>14 خرداد 1403 - 18:22</td><td>دکتر مریم احمدی</td><td>انتشار مقاله</td><td>198.51.100.77</td></tr>
+            <tr><td>14 خرداد 1403 - 14:30</td><td>کاربر 123</td><td>ایجاد تیکت پشتیبانی</td><td>192.0.2.189</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="btn btn-primary fab-btn rounded-circle" title="افزودن کاربر" onclick="addUser()">
+      <i class="bi bi-person-plus"></i>
+    </button>
+    <button class="btn btn-primary fab-btn rounded-circle" title="ایجاد محتوای جدید" onclick="createContent()">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+    <button class="btn btn-primary fab-btn rounded-circle" title="گزارش لحظه‌ای" onclick="exportData()">
+      <i class="bi bi-download"></i>
+    </button>
+  </div>
+
+  <script>
+    function loadSection(section) {
+      document.querySelectorAll('#main-content > div').forEach(el => el.style.display = 'none');
+      document.getElementById(section + '-section').style.display = 'block';
+      document.querySelectorAll('.sidebar-nav .nav-link').forEach(a => a.classList.remove('active'));
+      event.target.closest('.nav-link').classList.add('active');
+    }
+
+    function addUser() { alert('فرم افزودن کاربر باز شد.'); }
+    function createContent() { alert('فرم ایجاد محتوا باز شد.'); }
+    function exportData() { alert('گزارش لحظه‌ای در حال دانلود است...'); }
+    function logout() { if(confirm('آیا مطمئن به خروج هستید؟')) window.location.href = '/login.html'; }
+
+    document.addEventListener('DOMContentLoaded', () => loadSection('dashboard'));
+  </script>
+
+</body>
+</html>

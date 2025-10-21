@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>پنل ادمین | PsyClinic</title>
+
+  <!-- امنیت/سئو -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="پنل مدیریت PsyClinic: مدیریت کاربران، محتوا، مالی، گزارش‌ها، پشتیبانی و تنظیمات.">
+
+  <!-- Bootstrap RTL & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
+  <!-- فونت و استایل پروژه -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    body{font-family:'Vazirmatn',sans-serif;background:#f5f7fb}
+    :root{
+      --primary-color:#6c63ff;
+      --secondary-color:#4cc9f0;
+      --success:#05a660;
+      --warning:#ffb703;
+      --danger:#ef476f;
+    }
+    .admin-header{background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));color:#fff}
+    .admin-header .brand{font-weight:800}
+    .sidebar{background:#fff;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.06);position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}
+    .sidebar .nav-link{color:#344767;border-radius:10px;margin:4px 8px}
+    .sidebar .nav-link.active,.sidebar .nav-link:hover{background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));color:#fff}
+    .card-elev{border:none;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    .stat-card{text-align:center;padding:18px}
+    .stat-value{font-size:1.6rem;font-weight:800;color:var(--primary-color)}
+    .section{display:none}
+    .section.active{display:block}
+    .table thead th{background:#eef2f7}
+    .badge-role{font-size:.75rem}
+    .fab{position:fixed;left:20px;bottom:20px;display:flex;flex-direction:column;gap:12px;z-index:999}
+    .fab .btn{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px rgba(0,0,0,.2)}
+    .filter-bar .form-select,.filter-bar .form-control{border-radius:10px}
+    .toast-container{position:fixed;top:20px;left:20px;z-index:2000}
+    @media (max-width: 991.98px){
+      .sidebar{position:relative;top:auto;max-height:none}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="admin-header py-2">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-light d-lg-none" id="toggleSidebar" aria-label="باز/بسته کردن منو"><i class="bi bi-list"></i></button>
+          <div class="brand">PsyClinic Admin</div>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="small">مدیر کل | admin@psyclinic.ir</span>
+          <img src="https://via.placeholder.com/40x40.png?text=AD" class="rounded-circle" alt="Admin">
+          <a href="login.html" class="btn btn-sm btn-outline-light"><i class="bi bi-box-arrow-right me-1"></i>خروج</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <div class="container-fluid py-3">
+    <div class="row g-3">
+      <!-- SIDEBAR -->
+      <div class="col-lg-3">
+        <nav class="sidebar p-2" id="sidebarNav">
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link active" href="#dashboard" onclick="loadSection('dashboard', event)"><i class="bi bi-speedometer2 me-2"></i>داشبورد</a></li>
+            <li class="nav-item"><a class="nav-link" href="#users" onclick="loadSection('users', event)"><i class="bi bi-people me-2"></i>مدیریت کاربران</a></li>
+            <li class="nav-item"><a class="nav-link" href="#content" onclick="loadSection('content', event)"><i class="bi bi-journal-text me-2"></i>مدیریت محتوا</a></li>
+            <li class="nav-item"><a class="nav-link" href="#reports" onclick="loadSection('reports', event)"><i class="bi bi-graph-up me-2"></i>گزارش‌ها</a></li>
+            <li class="nav-item"><a class="nav-link" href="#finances" onclick="loadSection('finances', event)"><i class="bi bi-currency-dollar me-2"></i>مالی</a></li>
+            <li class="nav-item"><a class="nav-link" href="#support" onclick="loadSection('support', event)"><i class="bi bi-life-preserver me-2"></i>پشتیبانی</a></li>
+            <li class="nav-item"><a class="nav-link" href="#settings" onclick="loadSection('settings', event)"><i class="bi bi-gear me-2"></i>تنظیمات</a></li>
+            <li class="nav-item"><a class="nav-link" href="#logs" onclick="loadSection('logs', event)"><i class="bi bi-clipboard-data me-2"></i>لاگ‌ها</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- MAIN -->
+      <div class="col-lg-9">
+        <!-- Dashboard -->
+        <section id="dashboard" class="section active" data-aos="fade-up">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <div class="card-elev stat-card">
+                <div class="small text-muted">کاربران فعال</div>
+                <div class="stat-value" id="activeUsers">1,254</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card-elev stat-card">
+                <div class="small text-muted">مشاوران فعال</div>
+                <div class="stat-value" id="activePsych">86</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card-elev stat-card">
+                <div class="small text-muted">درآمد ماه جاری (تومان)</div>
+                <div class="stat-value" id="revenueMonth">28,000,000</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card-elev stat-card">
+                <div class="small text-muted">تیکت‌های باز</div>
+                <div class="stat-value" id="openTickets">12</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3 mt-1">
+            <div class="col-lg-7">
+              <div class="card-elev p-3">
+                <h6 class="mb-3">روند درآمد ۶ ماه اخیر</h6>
+                <canvas id="chartRevenue" height="130"></canvas>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-elev p-3">
+                <h6 class="mb-3">ترکیب محتوا</h6>
+                <canvas id="chartContentMix" height="180"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-elev p-3 mt-3">
+            <h6 class="mb-3">فعالیت‌های اخیر سیستم</h6>
+            <ul class="list-group list-group-flush small">
+              <li class="list-group-item d-flex justify-content-between">
+                <span>ثبت‌نام کاربر جدید: زهرا محمدی</span><span class="text-muted">امروز 10:25</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>انتشار پست وبلاگ توسط دکتر احمدی</span><span class="text-muted">دیروز 18:20</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>ثبت دوره جدید: «ذهن‌آگاهی»</span><span class="text-muted">دیروز 12:00</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Users -->
+        <section id="users" class="section" data-aos="fade-up">
+          <div class="card-elev p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">مدیریت کاربران</h5>
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalUser">
+                  <i class="bi bi-person-plus me-1"></i>افزودن کاربر
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="exportTableCSV('tableUsers','users.csv')">
+                  <i class="bi bi-download me-1"></i>خروجی CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-2 filter-bar mt-2">
+              <div class="col-md-3">
+                <input type="text" class="form-control form-control-sm" id="userSearch" placeholder="جستجو (نام/ایمیل)">
+              </div>
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" id="userRole">
+                  <option value="">همه نقش‌ها</option>
+                  <option value="client">کاربر</option>
+                  <option value="psychologist">مشاور</option>
+                  <option value="admin">ادمین</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" id="userStatus">
+                  <option value="">همه وضعیت‌ها</option>
+                  <option value="active">فعال</option>
+                  <option value="suspended">مسدود</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-outline-primary btn-sm w-100" onclick="filterUsers()">اعمال فیلتر</button>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="table table-hover align-middle" id="tableUsers">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" onclick="toggleAll(this,'users')"></th>
+                    <th>#</th><th>نام</th><th>ایمیل</th><th>نقش</th><th>وضعیت</th><th>تاریخ عضویت</th><th>آخرین فعالیت</th><th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody id="usersBody">
+                  <!-- داده نمونه -->
+                  <tr>
+                    <td><input type="checkbox" class="row-check-users"></td>
+                    <td>101</td>
+                    <td>علی رضایی</td>
+                    <td>ali@example.com</td>
+                    <td><span class="badge text-bg-secondary badge-role">client</span></td>
+                    <td><span class="badge text-bg-success">active</span></td>
+                    <td>1403/02/15</td>
+                    <td>1403/03/01</td>
+                    <td>
+                      <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                      <button class="btn btn-sm btn-warning">تغییر نقش</button>
+                      <button class="btn btn-sm btn-danger">مسدود</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="row-check-users"></td>
+                    <td>102</td>
+                    <td>دکتر مریم احمدی</td>
+                    <td>dr.ahmadi@psyclinic.ir</td>
+                    <td><span class="badge text-bg-primary badge-role">psychologist</span></td>
+                    <td><span class="badge text-bg-success">active</span></td>
+                    <td>1402/11/20</td>
+                    <td>1403/03/10</td>
+                    <td>
+                      <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                      <button class="btn btn-sm btn-warning">تغییر نقش</button>
+                      <button class="btn btn-sm btn-danger">مسدود</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="row-check-users"></td>
+                    <td>1</td>
+                    <td>مدیر کل</td>
+                    <td>admin@psyclinic.ir</td>
+                    <td><span class="badge text-bg-dark badge-role">admin</span></td>
+                    <td><span class="badge text-bg-success">active</span></td>
+                    <td>1402/01/01</td>
+                    <td>1403/03/15</td>
+                    <td>
+                      <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                      <button class="btn btn-sm btn-secondary" disabled>تغییر نقش</button>
+                      <button class="btn btn-sm btn-secondary" disabled>مسدود</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-2 d-flex gap-2">
+              <button class="btn btn-outline-danger btn-sm" onclick="bulkSuspend('users')"><i class="bi bi-slash-circle me-1"></i>مسدود گروهی</button>
+              <button class="btn btn-outline-secondary btn-sm" onclick="bulkRole('users')"><i class="bi bi-person-gear me-1"></i>تغییر نقش گروهی</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Content -->
+        <section id="content" class="section" data-aos="fade-up">
+          <div class="card-elev p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">مدیریت محتوا</h5>
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalContent">
+                  <i class="bi bi-plus-circle me-1"></i>محتوای جدید
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="exportTableCSV('tableContent','content.csv')">
+                  <i class="bi bi-download me-1"></i>خروجی CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-2 filter-bar mt-2">
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" id="contentType">
+                  <option value="">نوع محتوا</option>
+                  <option value="blog_post">پست وبلاگ</option>
+                  <option value="course">دوره</option>
+                  <option value="video">ویدیو</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" id="contentStatus">
+                  <option value="">همه وضعیت‌ها</option>
+                  <option value="draft">پیش‌نویس</option>
+                  <option value="published">منتشر شده</option>
+                  <option value="archived">آرشیو</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control form-control-sm" id="contentSearch" placeholder="جستجو در عنوان/نویسنده">
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="table table-hover align-middle" id="tableContent">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" onclick="toggleAll(this,'content')"></th>
+                    <th>#</th><th>عنوان</th><th>نوع</th><th>نویسنده</th><th>وضعیت</th><th>تاریخ</th><th>بازدید/ثبت‌نام</th><th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" class="row-check-content"></td>
+                    <td>501</td>
+                    <td>چگونه با اضطراب کنار بیاییم؟</td>
+                    <td><span class="badge text-bg-info">blog_post</span></td>
+                    <td>دکتر مریم احمدی</td>
+                    <td><span class="badge text-bg-success">published</span></td>
+                    <td>1403/03/01</td>
+                    <td>1245</td>
+                    <td>
+                      <button class="btn btn-sm btn-secondary">پیش‌نمایش</button>
+                      <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                      <button class="btn btn-sm btn-danger">حذف</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="row-check-content"></td>
+                    <td>301</td>
+                    <td>مدیریت اضطراب برای مبتدیان</td>
+                    <td><span class="badge text-bg-primary">course</span></td>
+                    <td>دکتر مریم احمدی</td>
+                    <td><span class="badge text-bg-success">active</span></td>
+                    <td>1403/02/28</td>
+                    <td>25</td>
+                    <td>
+                      <button class="btn btn-sm btn-secondary">پیش‌نمایش</button>
+                      <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                      <button class="btn btn-sm btn-danger">حذف</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-2 d-flex gap-2">
+              <button class="btn btn-outline-warning btn-sm"><i class="bi bi-eye-slash me-1"></i>عدم انتشار گروهی</button>
+              <button class="btn btn-outline-success btn-sm"><i class="bi bi-send-check me-1"></i>انتشار گروهی</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reports -->
+        <section id="reports" class="section" data-aos="fade-up">
+          <div class="card-elev p-3">
+            <h5 class="mb-3">گزارش‌ها</h5>
+            <div class="row g-2 filter-bar">
+              <div class="col-md-3">
+                <label class="small">از تاریخ</label>
+                <input type="date" class="form-control form-control-sm" id="fromDate">
+              </div>
+              <div class="col-md-3">
+                <label class="small">تا تاریخ</label>
+                <input type="date" class="form-control form-control-sm" id="toDate">
+              </div>
+              <div class="col-md-3">
+                <label class="small">نوع گزارش</label>
+                <select class="form-select form-select-sm" id="reportType">
+                  <option value="revenue">درآمد</option>
+                  <option value="users">کاربران</option>
+                  <option value="sessions">جلسات</option>
+                  <option value="courses">دوره‌ها</option>
+                </select>
+              </div>
+              <div class="col-md-3 d-flex align-items-end gap-2">
+                <button class="btn btn-primary btn-sm w-100" onclick="generateReport()">تولید گزارش</button>
+                <button class="btn btn-outline-secondary btn-sm w-100" onclick="exportTableCSV('tableReport','report.csv')">خروجی CSV</button>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-2">
+              <div class="col-lg-7">
+                <div class="card-elev p-3">
+                  <h6 class="mb-2">نمودار گزارش</h6>
+                  <canvas id="chartReport" height="160"></canvas>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="table-responsive card-elev p-3">
+                  <h6 class="mb-2">خلاصه عددی</h6>
+                  <table class="table table-sm" id="tableReport">
+                    <thead><tr><th>شاخص</th><th>مقدار</th></tr></thead>
+                    <tbody>
+                      <tr><td>درآمد کل (تومان)</td><td id="rep_total">28,000,000</td></tr>
+                      <tr><td>میانگین روزانه (تومان)</td><td id="rep_avg">933,000</td></tr>
+                      <tr><td>تعداد جلسات</td><td id="rep_sessions">126</td></tr>
+                      <tr><td>تعداد کاربران جدید</td><td id="rep_newusers">142</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Finances -->
+        <section id="finances" class="section" data-aos="fade-up">
+          <div class="card-elev p-3">
+            <h5 class="mb-3">مالی و حسابداری</h5>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="card-elev p-3 text-center">
+                  <div class="small text-muted">درآمد کل</div>
+                  <div class="stat-value">125,000,000</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card-elev p-3 text-center">
+                  <div class="small text-muted">درآمد ماه جاری</div>
+                  <div class="stat-value">28,000,000</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card-elev p-3 text-center">
+                  <div class="small text-muted">تسویه‌های معوق</div>
+                  <div class="stat-value">3</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <h6 class="mb-0">تراکنش‌ها</h6>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary btn-sm" onclick="exportTableCSV('tableTx','transactions.csv')"><i class="bi bi-download me-1"></i>CSV</button>
+                <button class="btn btn-success btn-sm"><i class="bi bi-wallet me-1"></i>درخواست تسویه</button>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-2">
+              <table class="table align-middle" id="tableTx">
+                <thead>
+                  <tr><th>#</th><th>تاریخ</th><th>مبلغ (تومان)</th><th>نوع</th><th>کاربر/مشاور</th><th>وضعیت</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>701</td><td>1403/03/15</td><td>150,000</td><td>درآمد جلسه</td><td>علی رضایی</td><td><span class="badge text-bg-success">کامل شد</span></td></tr>
+                  <tr><td>702</td><td>1403/03/10</td><td>750,000</td><td>ثبت‌نام دوره</td><td>زهرا محمدی</td><td><span class="badge text-bg-success">کامل شد</span></td></tr>
+                  <tr><td>703</td><td>1403/03/05</td><td>300,000</td><td>برداشت</td><td>-</td><td><span class="badge text-bg-warning text-dark">در انتظار</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Support -->
+        <section id="support" class="section" data-aos="fade-up">
+          <div class="card-elev p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">تیکت‌های پشتیبانی</h5>
+              <div>
+                <button class="btn btn-outline-secondary btn-sm" onclick="exportTableCSV('tableTickets','tickets.csv')"><i class="bi bi-download me-1"></i>CSV</button>
+              </div>
+            </div>
+
+            <div class="row g-2 filter-bar mt-2">
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" id="ticketStatus">
+                  <option value="">همه وضعیت‌ها</option>
+                  <option value="open">باز</option>
+                  <option value="pending">در انتظار</option>
+                  <option value="closed">بسته</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" id="ticketPriority">
+                  <option value="">همه اولویت‌ها</option>
+                  <option value="low">کم</option>
+                  <option value="medium">متوسط</option>
+                  <option value="high">بالا</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <input type="text" id="ticketSearch" class="form-control form-control-sm" placeholder="جستجو (موضوع/کاربر)">
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="table align-middle" id="tableTickets">
+                <thead><tr><th>#</th><th>موضوع</th><th>کاربر</th><th>اولویت</th><th>وضعیت</th><th>ایجاد</th><th>عملیات</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>901</td><td>مشکل ورود</td><td>کاربر 123</td>
+                    <td><span class="badge text-bg-danger">high</span></td>
+                    <td><span class="badge text-bg-primary">open</span></td>
+                    <td>1403/03/14</td>
+                    <td>
+                      <button class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modalTicket">مشاهده/پاسخ</button>
+                      <button class="btn btn-sm btn-success">بستن</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>902</td><td>سوال درباره دوره</td><td>کاربر 456</td>
+                    <td><span class="badge text-bg-warning text-dark">medium</span></td>
+                    <td><span class="badge text-bg-warning text-dark">pending</span></td>
+                    <td>1403/03/13</td>
+                    <td>
+                      <button class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modalTicket">مشاهده/پاسخ</button>
+                      <button class="btn btn-sm btn-success">بستن</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="settings" class="section" data-aos="fade-up">
+          <div class="card-elev p-3">
+            <h5 class="mb-3">تنظیمات سیستمی</h5>
+            <div class="row g-3">
+              <div class="col-lg-6">
+                <div class="card-elev p-3 h-100">
+                  <h6 class="mb-3">تنظیمات عمومی</h6>
+                  <div class="mb-2">
+                    <label class="form-label small">نام سیستم</label>
+                    <input type="text" class="form-control form-control-sm" value="PsyClinic">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label small">ایمیل پشتیبانی</label>
+                    <input type="email" class="form-control form-control-sm" value="support@psyclinic.ir">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label small">آدرس</label>
+                    <input type="text" class="form-control form-control-sm" value="تهران، ...">
+                  </div>
+                  <button class="btn btn-primary btn-sm mt-2">ذخیره</button>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card-elev p-3 h-100">
+                  <h6 class="mb-3">درگاه پرداخت</h6>
+                  <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="gateway1" checked>
+                    <label class="form-check-label" for="gateway1">ZarinPal</label>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label small">Merchant ID</label>
+                    <input type="text" class="form-control form-control-sm" value="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+                  </div>
+                  <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="gateway2">
+                    <label class="form-check-label" for="gateway2">IDPay</label>
+                  </div>
+                  <button class="btn btn-primary btn-sm mt-2">ذخیره</button>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card-elev p-3 h-100">
+                  <h6 class="mb-3">ایمیل (SMTP)</h6>
+                  <div class="row g-2">
+                    <div class="col-6">
+                      <label class="form-label small">Host</label>
+                      <input type="text" class="form-control form-control-sm" value="smtp.mailtrap.io">
+                    </div>
+                    <div class="col-3">
+                      <label class="form-label small">Port</label>
+                      <input type="number" class="form-control form-control-sm" value="587">
+                    </div>
+                    <div class="col-3">
+                      <label class="form-label small">TLS</label>
+                      <select class="form-select form-select-sm"><option>روشن</option><option>خاموش</option></select>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label small">Username</label>
+                      <input type="text" class="form-control form-control-sm" value="user">
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label small">Password</label>
+                      <input type="password" class="form-control form-control-sm" value="••••••••">
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-sm mt-2">ذخیره</button>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card-elev p-3 h-100">
+                  <h6 class="mb-3">امنیت</h6>
+                  <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="2fa">
+                    <label class="form-check-label" for="2fa">احراز هویت دو مرحله‌ای</label>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label small">IP Whitelist (هر خط یک IP)</label>
+                    <textarea class="form-control form-control-sm" rows="3" placeholder="192.168.1.10&#10;10.0.0.2"></textarea>
+                  </div>
+                  <button class="btn btn-primary btn-sm mt-2">ذخیره</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Logs -->
+        <section id="logs" class="section" data-aos="fade-up">
+          <div class="card-elev p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">لاگ‌های سیستم</h5>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-secondary btn-sm" onclick="exportTableCSV('tableLogs','logs.csv')"><i class="bi bi-download me-1"></i>CSV</button>
+                <button class="btn btn-outline-danger btn-sm" onclick="confirmClearLogs()"><i class="bi bi-trash3 me-1"></i>پاکسازی</button>
+              </div>
+            </div>
+
+            <div class="row g-2 filter-bar mt-2">
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" id="logAction">
+                  <option value="">همه عملیات</option>
+                  <option value="user_login">user_login</option>
+                  <option value="content_create">content_create</option>
+                  <option value="payment">payment</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <input type="date" class="form-control form-control-sm" id="logFrom">
+              </div>
+              <div class="col-md-3">
+                <input type="date" class="form-control form-control-sm" id="logTo">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control form-control-sm" id="logSearch" placeholder="جستجو (کاربر/IP)">
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="table align-middle" id="tableLogs">
+                <thead><tr><th>#</th><th>عملیات</th><th>کاربر</th><th>IP</th><th>تاریخ</th></tr></thead>
+                <tbody>
+                  <tr><td>1001</td><td>user_login</td><td>ali@example.com</td><td>192.168.1.1</td><td>1403/03/15 10:30</td></tr>
+                  <tr><td>1002</td><td>content_create</td><td>dr.ahmadi@psyclinic.ir</td><td>10.0.0.5</td><td>1403/03/14 18:20</td></tr>
+                  <tr><td>1003</td><td>payment</td><td>zahra@example.com</td><td>172.16.0.3</td><td>1403/03/14 12:05</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUser" title="افزودن کاربر"><i class="bi bi-person-plus"></i></button>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalContent" title="محتوای جدید"><i class="bi bi-journal-plus"></i></button>
+    <button class="btn btn-warning" onclick="loadSection('reports');setTimeout(generateReport,200)" title="گزارش لحظه‌ای"><i class="bi bi-bar-chart-line"></i></button>
+  </div>
+
+  <!-- Modals -->
+  <!-- Add/Edit User -->
+  <div class="modal fade" id="modalUser" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">افزودن/ویرایش کاربر</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-2"><label class="form-label small">نام و نام خانوادگی</label><input class="form-control"></div>
+          <div class="mb-2"><label class="form-label small">ایمیل</label><input type="email" class="form-control"></div>
+          <div class="mb-2"><label class="form-label small">نقش</label>
+            <select class="form-select">
+              <option value="client">کاربر</option>
+              <option value="psychologist">مشاور</option>
+              <option value="admin">ادمین</option>
+            </select>
+          </div>
+          <div class="mb-2"><label class="form-label small">وضعیت</label>
+            <select class="form-select">
+              <option value="active">فعال</option>
+              <option value="suspended">مسدود</option>
+            </select>
+          </div>
+          <div class="mb-2"><label class="form-label small">رمز عبور (برای کاربر جدید یا تغییر)</label><input type="password" class="form-control"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+          <button class="btn btn-primary">ذخیره</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- New Content -->
+  <div class="modal fade" id="modalContent" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ایجاد/ویرایش محتوا</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-2">
+            <div class="col-md-6"><label class="form-label small">عنوان</label><input class="form-control"></div>
+            <div class="col-md-3">
+              <label class="form-label small">نوع</label>
+              <select class="form-select">
+                <option value="blog_post">پست وبلاگ</option>
+                <option value="course">دوره</option>
+                <option value="video">ویدیو</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small">وضعیت</label>
+              <select class="form-select">
+                <option value="draft">پیش‌نویس</option>
+                <option value="published">منتشر شده</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label small">خلاصه/توضیحات</label>
+              <textarea class="form-control" rows="4"></textarea>
+            </div>
+            <div class="col-12">
+              <label class="form-label small">فایل ضمیمه (تصویر/ویدیو)</label>
+              <input type="file" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small">زمان‌بندی انتشار (اختیاری)</label>
+              <input type="datetime-local" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+          <button class="btn btn-primary">ذخیره</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Ticket Reply -->
+  <div class="modal fade" id="modalTicket" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">جزئیات تیکت / پاسخ</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="border rounded p-2 mb-2 small bg-light">[کاربر 123] مشکل ورود: «رمز عبور کار نمی‌کند.» (1403/03/14)</div>
+          <div class="mb-2"><label class="form-label small">پاسخ</label><textarea class="form-control" rows="3"></textarea></div>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label small">تغییر وضعیت</label>
+              <select class="form-select form-select-sm">
+                <option>open</option><option>pending</option><option>closed</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small">اولویت</label>
+              <select class="form-select form-select-sm">
+                <option>low</option><option selected>medium</option><option>high</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+          <button class="btn btn-primary">ارسال پاسخ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toasts -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({once:true,duration:700});</script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Admin Dashboard JS -->
+  <script>
+    // تغییر بخش فعال
+    function loadSection(id, ev){
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.sidebar .nav-link').forEach(a => a.classList.remove('active'));
+      if (ev) ev.currentTarget.classList.add('active');
+      if (id==='reports') setTimeout(()=>updateReportChart(),100);
+    }
+
+    // Sidebar toggle (mobile)
+    document.getElementById('toggleSidebar')?.addEventListener('click', ()=>{
+      document.getElementById('sidebarNav').classList.toggle('d-none');
+    });
+
+    // Chart.js - Dashboard Revenue
+    const revCtx = document.getElementById('chartRevenue');
+    const chartRevenue = new Chart(revCtx, {
+      type:'line',
+      data:{
+        labels:['دی','بهمن','اسفند','فروردین','اردیبهشت','خرداد'],
+        datasets:[{label:'درآمد (میلیون تومان)', data:[8,10,9,12,15,18], borderColor:'#6c63ff', backgroundColor:'rgba(108,99,255,.15)', tension:.25, fill:true}]
+      },
+      options:{responsive:true, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+    });
+
+    // Chart.js - Content Mix
+    const mixCtx = document.getElementById('chartContentMix');
+    const chartContentMix = new Chart(mixCtx, {
+      type:'doughnut',
+      data:{
+        labels:['پست وبلاگ','دوره','ویدیو'],
+        datasets:[{data:[56,28,16], backgroundColor:['#6c63ff','#4cc9f0','#05a660']}]
+      },
+      options:{responsive:true, plugins:{legend:{position:'bottom'}}}
+    });
+
+    // Reports - dynamic chart placeholder
+    let chartReport;
+    function updateReportChart(){
+      const el = document.getElementById('chartReport');
+      if(chartReport) chartReport.destroy();
+      const type = document.getElementById('reportType').value || 'revenue';
+      let labels = ['هفته 1','هفته 2','هفته 3','هفته 4'];
+      let data = type==='revenue' ? [6,7,8,7.5] : type==='users' ? [120,140,160,180] : type==='sessions' ? [20,28,26,32] : [5,8,10,12];
+      const color = type==='revenue' ? '#6c63ff' : type==='users' ? '#05a660' : type==='sessions' ? '#ffb703' : '#4cc9f0';
+      chartReport = new Chart(el, {
+        type:'bar',
+        data:{labels, datasets:[{label:type, data, backgroundColor:color}]},
+        options:{responsive:true, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+      });
+    }
+
+    function generateReport(){
+      // در نسخه‌ی واقعی، اینجا فراخوانی API و پر کردن جدول خلاصه انجام می‌شود
+      updateReportChart();
+      showToast('گزارش با موفقیت تولید شد');
+    }
+
+    // CSV Export helper
+    function exportTableCSV(tableId, filename){
+      const rows = Array.from(document.querySelectorAll(`#${tableId} tr`));
+      const csv = rows.map(row => Array.from(row.querySelectorAll('th,td')).map(cell => `"${cell.innerText.replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = filename || 'export.csv'; link.click();
+    }
+
+    // Bulk helpers
+    function toggleAll(master, group){
+      document.querySelectorAll(`.row-check-${group}`).forEach(cb => cb.checked = master.checked);
+    }
+    function bulkSuspend(group){ showToast('کاربران انتخاب‌شده مسدود شدند (دمو)'); }
+    function bulkRole(group){ showToast('نقش کاربران انتخاب‌شده تغییر یافت (دمو)'); }
+
+    // Filters (demos)
+    function filterUsers(){ showToast('فیلتر کاربران اعمال شد (دمو)'); }
+
+    // Logs
+    function confirmClearLogs(){
+      if(confirm('آیا از پاکسازی لاگ‌ها مطمئن هستید؟ این عملیات قابل بازگشت نیست.')) {
+        showToast('لاگ‌ها پاکسازی شدند (دمو)');
+        // در نسخه واقعی: فراخوانی API و سپس ریفرش جدول
+      }
+    }
+
+    // Toast UI
+    function showToast(message, type='info'){
+      const id = 't_' + Date.now();
+      const bg = type==='success' ? 'bg-success' : type==='danger' ? 'bg-danger' : 'bg-dark';
+      const toast = document.createElement('div');
+      toast.id = id;
+      toast.className = `toast align-items-center text-white ${bg} border-0 show mb-2`;
+      toast.role = 'alert';
+      toast.innerHTML = `
+        <div class="d-flex">
+          <div class="toast-body small">${message}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" onclick="document.getElementById('${id}').remove()"></button>
+        </div>`;
+      document.getElementById('toastContainer').appendChild(toast);
+      setTimeout(()=>{document.getElementById(id)?.remove()}, 3500);
+    }
+
+    // Default
+    document.addEventListener('DOMContentLoaded', ()=>{
+      loadSection('dashboard');
+      updateReportChart();
+    });
+  </script>
+</body>
+</html>

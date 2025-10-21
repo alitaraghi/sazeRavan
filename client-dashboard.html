@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل کاربری - PsyClinic</title>
+
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS for Dashboard -->
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-nav i {
+            margin-left: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .session-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .course-progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .course-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .content-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .follow-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .settings-form {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="mb-0">خوش آمدید، علی رضایی!</h4>
+                    <p class="mb-0 small">آخرین ورود: ۱۵ خرداد ۱۴۰۴</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <img src="https://via.placeholder.com/50x50.png?text=User" alt="آواتار" class="rounded-circle me-2">
+                    <a href="#" class="btn btn-outline-light btn-sm">خروج</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <nav class="sidebar">
+                    <ul class="sidebar-nav">
+                        <li><a href="#dashboard" class="active" onclick="loadSection('dashboard')">
+                            <i class="bi bi-house-door"></i>داشبورد
+                        </a></li>
+                        <li><a href="#sessions" onclick="loadSection('sessions')">
+                            <i class="bi bi-calendar-check"></i>جلسات من
+                        </a></li>
+                        <li><a href="#courses" onclick="loadSection('courses')">
+                            <i class="bi bi-book"></i>دوره‌های من
+                        </a></li>
+                        <li><a href="#following" onclick="loadSection('following')">
+                            <i class="bi bi-heart"></i>مشاوران دنبال شده
+                        </a></li>
+                        <li><a href="#saved" onclick="loadSection('saved')">
+                            <i class="bi bi-bookmark"></i>محتوای ذخیره شده
+                        </a></li>
+                        <li><a href="#settings" onclick="loadSection('settings')">
+                            <i class="bi bi-gear"></i>تنظیمات
+                        </a></li>
+                        <li><a href="#" onclick="logout()">
+                            <i class="bi bi-box-arrow-right"></i>خروج
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div class="col-lg-9">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="main-content">
+                    <h2 class="mb-4">داشبورد</h2>
+                    <div class="row">
+                        <div class="col-md-3 mb-4" data-aos="fade-up">
+                            <div class="stat-card">
+                                <div class="stat-number">۲</div>
+                                <div class="stat-label">جلسه آینده</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="stat-card">
+                                <div class="stat-number">۳</div>
+                                <div class="stat-label">دوره فعال</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="stat-card">
+                                <div class="stat-number">۱۵۰,۰۰۰</div>
+                                <div class="stat-label">اعتبار کیف پول (تومان)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="stat-card">
+                                <div class="stat-number">۴</div>
+                                <div class="stat-label">پیام جدید</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h5>فعالیت‌های اخیر</h5>
+                            <div class="content-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>جلسه با دکتر مریم احمدی</span>
+                                    <small class="text-muted">۱۵ خرداد ۱۴۰۴</small>
+                                </div>
+                            </div>
+                            <div class="content-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>شروع دوره مدیریت استرس</span>
+                                    <small class="text-muted">۱۰ خرداد ۱۴۰۴</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>پیشنهادات</h5>
+                            <div class="content-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>دوره جدید: تکنیک‌های CBT</span>
+                                    <small class="text-primary">رایگان</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sessions Section -->
+                <div id="sessions" class="main-content hidden">
+                    <h2 class="mb-4">جلسات من</h2>
+                    <div class="session-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>جلسه با دکتر مریم احمدی</h6>
+                                <p class="mb-0 small text-muted">۱۵ خرداد ۱۴۰۴ - ۱۰:۰۰</p>
+                            </div>
+                            <div>
+                                <span class="badge bg-success">آینده</span>
+                                <a href="#" class="btn btn-sm btn-outline-primary">لینک جلسه</a>
+                                <button class="btn btn-sm btn-outline-danger">لغو</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="session-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>جلسه با دکتر علی رضایی</h6>
+                                <p class="mb-0 small text-muted">۱۰ خرداد ۱۴۰۴ - ۱۴:۰۰</p>
+                            </div>
+                            <div>
+                                <span class="badge bg-secondary">انجام شده</span>
+                                <a href="#" class="btn btn-sm btn-outline-primary">مشاهده پرونده</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses Section -->
+                <div id="courses" class="main-content hidden">
+                    <h2 class="mb-4">دوره‌های من</h2>
+                    <div class="session-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>مدیریت اضطراب</h6>
+                                <p class="mb-0 small text-muted">مدرس: دکتر مریم احمدی</p>
+                            </div>
+                            <div>
+                                <div class="course-progress">
+                                    <div class="course-progress-bar" style="width: 65%;"></div>
+                                </div>
+                                <small class="text-muted">۶۵% کامل شده</small>
+                                <a href="course-player.html" class="btn btn-sm btn-primary">ادامه</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="session-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>تکنیک‌های CBT</h6>
+                                <p class="mb-0 small text-muted">مدرس: دکتر علی رضایی</p>
+                            </div>
+                            <div>
+                                <div class="course-progress">
+                                    <div class="course-progress-bar" style="width: 100%;"></div>
+                                </div>
+                                <small class="text-success">تکمیل شده</small>
+                                <a href="#" class="btn btn-sm btn-success">گواهینامه</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Following Section -->
+                <div id="following" class="main-content hidden">
+                    <h2 class="mb-4">مشاوران دنبال شده</h2>
+                    <div class="follow-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="https://via.placeholder.com/50x50.png?text=Dr" alt="دکتر" class="rounded-circle me-3">
+                                <div>
+                                    <h6>دکتر مریم احمدی</h6>
+                                    <p class="mb-0 small text-muted">روانشناس بالینی</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger">لغو دنبال</button>
+                        </div>
+                    </div>
+                    <div class="follow-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="https://via.placeholder.com/50x50.png?text=Dr" alt="دکتر" class="rounded-circle me-3">
+                                <div>
+                                    <h6>دکتر علی رضایی</h6>
+                                    <p class="mb-0 small text-muted">روانشناس کودک</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger">لغو دنبال</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Content Section -->
+                <div id="saved" class="main-content hidden">
+                    <h2 class="mb-4">محتوای ذخیره شده</h2>
+                    <div class="content-item">
+                        <div class="d-flex justify-content-between">
+                            <span>مقاله: چگونه با اضطراب کنار بیاییم؟</span>
+                            <small class="text-muted">ذخیره شده: ۱۰ خرداد</small>
+                        </div>
+                    </div>
+                    <div class="content-item">
+                        <div class="d-flex justify-content-between">
+                            <span>ویدیو: تکنیک‌های تنفس</span>
+                            <small class="text-muted">ذخیره شده: ۵ خرداد</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings" class="main-content hidden">
+                    <h2 class="mb-4">تنظیمات</h2>
+                    <div class="settings-form">
+                        <h5>اطلاعات شخصی</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>نام</label>
+                                <input type="text" class="form-control" value="علی">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>نام خانوادگی</label>
+                                <input type="text" class="form-control" value="رضایی">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>ایمیل</label>
+                                <input type="email" class="form-control" value="ali@example.com">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>شماره موبایل</label>
+                                <input type="tel" class="form-control" value="۰۹۱۲-۳۴۵۶۷۸۹">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">ذخیره تغییرات</button>
+                    </div>
+                    <div class="settings-form mt-4">
+                        <h5>تغییر رمز عبور</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>رمز عبور فعلی</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>رمز عبور جدید</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label>تکرار رمز عبور جدید</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">تغییر رمز عبور</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        function loadSection(section) {
+            // Hide all sections
+            const sections = ['dashboard', 'sessions', 'courses', 'following', 'saved', 'settings'];
+            sections.forEach(s => {
+                document.getElementById(s).classList.add('hidden');
+            });
+
+            // Show selected section
+            document.getElementById(section).classList.remove('hidden');
+
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-nav a').forEach(a => {
+                a.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function logout() {
+            if (confirm('آیا مطمئن هستید که می‌خواهید خارج شوید؟')) {
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

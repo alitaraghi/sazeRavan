@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مدیریت استرس پیشرفته — PsyClinic</title>
+
+  <!-- Bootstrap RTL & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS (پیش از این ساخته شده) -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- AOS (Animate on scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    /* اختصاصی صفحه دوره */
+    .course-hero {
+      background: linear-gradient(135deg, rgba(108,99,255,0.08), rgba(76,201,240,0.05));
+      padding: 50px 0;
+      margin-bottom: 30px;
+      border-radius: 10px;
+    }
+    .course-title { font-size: 1.9rem; font-weight:700; }
+    .instructor-mini { display:flex; align-items:center; gap:12px; }
+    .instructor-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; }
+    .price-badge {
+      background: linear-gradient(45deg,#6c63ff,#5a52d8);
+      color: #fff;
+      padding:8px 16px;
+      border-radius:28px;
+      font-weight:700;
+      font-size:1.1rem;
+    }
+    .meta-row { color: #6c757d; }
+    .stars i { color:#ffd700; }
+    .course-tabs .nav-link.active { border-bottom-color: var(--primary-color); color:var(--primary-color); }
+    .curriculum .module { border:1px solid #e9ecef; border-radius:8px; margin-bottom:12px; overflow:hidden; }
+    .lesson { padding:10px 14px; border-bottom:1px solid #f0f0f0; display:flex; justify-content:space-between; align-items:center; }
+    .lesson:last-child { border-bottom:none; }
+    .lesson .lesson-title { font-weight:500; }
+    .badge-free { background:#e9f7ef;color:#0f5132;border-radius:12px;padding:4px 8px;font-size:.8rem; }
+    .sidebar-card { border-radius:12px; padding:20px; background:#fff; box-shadow:0 6px 20px rgba(0,0,0,0.04); margin-bottom:18px; }
+    .related-card img { height:100px; object-fit:cover; border-radius:8px; }
+    .action-btn { border-radius:50px; padding:10px 18px; }
+    .floating-enroll { position:fixed; bottom:18px; left:18px; right:18px; z-index:999; display:none; }
+    @media(max-width:768px){ .floating-enroll{ display:block } }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (مشابه بقیه صفحات) -->
+  <!-- HEADER: ناوبری اصلی -->
+    <header class="sticky-top bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <!-- لوگو -->
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+                </a>
+
+                <!-- دکمه موبایل -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- منوی اصلی -->
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">
+                                <i class="bi bi-house-door me-1"></i>صفحه اصلی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="psychologists.html">
+                                <i class="bi bi-people me-1"></i>مشاوران
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">
+                                <i class="bi bi-journal-text me-1"></i>وبلاگ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="courses.html">
+                                <i class="bi bi-book me-1"></i>دوره‌های آموزشی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i>درباره ما
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="bi bi-envelope me-1"></i>تماس با ما
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- دکمه‌های ورود/ثبت‌نام -->
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary me-2">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>ورود
+                        </a>
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i>ثبت‌نام
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+  <!-- HERO -->
+  <section class="container course-hero">
+    <div class="row align-items-center">
+      <div class="col-md-8" data-aos="fade-up">
+        <div class="mb-2"><span class="badge bg-info text-white">در حال ثبت‌نام</span></div>
+        <h1 class="course-title mb-2">مدیریت استرس پیشرفته</h1>
+        <div class="d-flex align-items-center gap-3 meta-row mb-3">
+          <div class="stars">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-half"></i>
+            <span class="ms-2">۴٫۸ (۱۵۶ نظر)</span>
+          </div>
+          <div>👨‍🏫 مدرس: <a href="psychologist-profile.html?id=1" class="text-decoration-none">دکتر مریم احمدی</a></div>
+          <div>👥 ۱٬۲۳۴ دانشجو</div>
+          <div>⌛ ۸ ساعت</div>
+        </div>
+        <p class="text-muted mb-3">دوره‌ای عملی برای مدیریت استرس و افزایش تاب‌آوری روانی. شامل تمرینات، ویدیوهای آموزشی و راهنمایی‌های قابل اجرا.</p>
+
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-primary action-btn" data-bs-toggle="modal" data-bs-target="#enrollModal">
+            <i class="bi bi-cart-plus me-2"></i>ثبت‌نام در دوره — <span style="font-weight:700">۱٬۲۰۰٬۰۰۰ تومان</span>
+          </button>
+          <button class="btn btn-outline-secondary action-btn" id="wishlistBtn" onclick="toggleWishlist()">
+            <i class="bi bi-heart" id="wishlistIcon"></i> افزودن به علاقه‌مندی‌ها
+          </button>
+          <button class="btn btn-outline-secondary action-btn" onclick="document.getElementById('shareModal').classList.add('show');">
+            <i class="bi bi-share"></i> اشتراک‌گذاری
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-4 text-center" data-aos="fade-left">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="Course image" class="img-fluid rounded">
+        <div class="mt-3">
+          <span class="price-badge">۱٬۲۰۰٬۰۰۰ تومان</span>
+          <div class="small text-muted mt-2">قابل پرداخت به صورت آنلاین</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="container mb-5">
+    <div class="row gx-4">
+      <!-- محتوا -->
+      <div class="col-lg-8" data-aos="fade-up">
+        <!-- تب‌ها -->
+        <ul class="nav nav-tabs course-tabs mb-3" id="courseTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab">توضیحات</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="curr-tab" data-bs-toggle="tab" data-bs-target="#curr" type="button" role="tab">سرفصل‌ها</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">نظرات (۱۵۶)</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="qna-tab" data-bs-toggle="tab" data-bs-target="#qna" type="button" role="tab">پرسش و پاسخ</button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <!-- توضیحات -->
+          <div class="tab-pane fade show active" id="desc" role="tabpanel">
+            <section class="mb-4">
+              <article class="bg-white p-4 rounded shadow-sm">
+                <h4>درباره دوره</h4>
+                <p>این دوره، به شما مهارت‌های کاربردی برای مدیریت استرس و اضطراب را می‌آموزد. ترکیبی از مباحث نظری و تمرین‌های عملی برای ایجاد تغییر واقعی در زندگی روزمره شما است.</p>
+
+                <h5 class="mt-4">آنچه در این دوره یاد می‌گیرید</h5>
+                <ul>
+                  <li>شناخت مکانیسم‌های استرس</li>
+                  <li>تکنیک‌های تنفس و مدیتیشن</li>
+                  <li>آموزش برنامه‌ریزی و مدیریت زمان</li>
+                  <li>استراتژی‌های مقابله‌ای در محیط‌های شغلی و خانوادگی</li>
+                </ul>
+
+                <h5 class="mt-4">مطالب چندرسانه‌ای</h5>
+                <div class="video-player mb-3">
+                  <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="video sample" allowfullscreen></iframe>
+                  </div>
+                </div>
+
+                <div class="audio-player mb-3">
+                  <audio controls class="w-100">
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    مرورگر شما پخش صوت را پشتیبانی نمی‌کند.
+                  </audio>
+                </div>
+              </article>
+            </section>
+          </div>
+
+          <!-- سرفصل -->
+          <div class="tab-pane fade" id="curr" role="tabpanel">
+            <section class="curriculum bg-white p-3 rounded shadow-sm">
+              <h5 class="mb-3">سرفصل‌ها</h5>
+
+              <!-- Module 1 -->
+              <div class="module mb-2">
+                <button class="btn btn-light w-100 text-start p-3" type="button" data-bs-toggle="collapse" data-bs-target="#mod1" aria-expanded="true">
+                  <strong>بخش ۱ — مفاهیم پایه</strong>
+                  <span class="float-start small text-muted">۳ جلسه — ۶۰ دقیقه</span>
+                </button>
+                <div id="mod1" class="collapse show">
+                  <div class="lesson">
+                    <div>
+                      <span class="lesson-title">جلسه ۱ — تعریف استرس</span>
+                      <div class="small text-muted">۱۵ دقیقه</div>
+                    </div>
+                    <div>
+                      <button class="btn btn-sm btn-outline-primary me-2" onclick="previewLesson('https://www.youtube.com/embed/dQw4w9WgXcQ')">پیش‌نمایش</button>
+                      <span class="badge badge-free bg-success rounded-pill">پیش‌نمایش رایگان</span>
+                    </div>
+                  </div>
+                  <div class="lesson">
+                    <div>
+                      <span class="lesson-title">جلسه ۲ — انواع استرس</span>
+                      <div class="small text-muted">۲۰ دقیقه</div>
+                    </div>
+                    <div>
+                      <button class="btn btn-sm btn-outline-primary me-2" onclick="previewLesson('https://www.youtube.com/embed/dQw4w9WgXcQ')">پیش‌نمایش</button>
+                      <span class="badge badge-free bg-success rounded-pill">پیش‌نمایش رایگان</span>
+                    </div>
+                  </div>
+                  <div class="lesson">
+                    <div>
+                      <span class="lesson-title">جلسه ۳ — مکانیسم‌های بدن</span>
+                      <div class="small text-muted">۲۵ دقیقه</div>
+                    </div>
+                    <div><span class="small text-muted">قفل (پس از خرید)</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Module 2 -->
+              <div class="module mb-2">
+                <button class="btn btn-light w-100 text-start p-3" type="button" data-bs-toggle="collapse" data-bs-target="#mod2" aria-expanded="false">
+                  <strong>بخش ۲ — تکنیک‌های عملی</strong>
+                  <span class="float-start small text-muted">۴ جلسه — ۹۰ دقیقه</span>
+                </button>
+                <div id="mod2" class="collapse">
+                  <div class="lesson">
+                    <div>
+                      <span class="lesson-title">جلسه ۴ — تنفس دیافراگمی</span>
+                      <div class="small text-muted">۲۰ دقیقه</div>
+                    </div>
+                    <div><button class="btn btn-sm btn-outline-primary" onclick="previewLesson('https://www.youtube.com/embed/dQw4w9WgXcQ')">پیش‌نمایش</button></div>
+                  </div>
+                  <div class="lesson">
+                    <div>
+                      <span class="lesson-title">جلسه ۵ — مدیتیشن کوتاه</span>
+                      <div class="small text-muted">۱۵ دقیقه</div>
+                    </div>
+                    <div><span class="small text-muted">قفل</span></div>
+                  </div>
+                  <div class="lesson">
+                    <div>
+                      <span class="lesson-title">جلسه ۶ — تمرینات عملی</span>
+                      <div class="small text-muted">۳۰ دقیقه</div>
+                    </div>
+                    <div><span class="small text-muted">قفل</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add more modules as needed -->
+            </section>
+          </div>
+
+          <!-- نظرات -->
+          <div class="tab-pane fade" id="reviews" role="tabpanel">
+            <section class="pt-2">
+              <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="mb-0">امتیاز میانگین</h4>
+                    <div class="d-flex align-items-center">
+                      <div class="display-6 text-warning">۴٫۸</div>
+                      <div class="ms-3 small text-muted">از ۱۵۶ نظر</div>
+                    </div>
+                  </div>
+                  <div>
+                    <!-- Filter Sort -->
+                    <select id="reviewSort" class="form-select form-select-sm">
+                      <option value="new">جدیدترین</option>
+                      <option value="top">بالاترین امتیاز</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Review Form -->
+                <div class="mb-4">
+                  <h6>ارسال نظر</h6>
+                  <form id="reviewForm" onsubmit="submitReview(event)">
+                    <div class="mb-2">
+                      <label class="form-label small">امتیاز</label>
+                      <select id="reviewRating" class="form-select form-select-sm" style="width:120px;">
+                        <option value="5">۵ ستاره</option>
+                        <option value="4">۴ ستاره</option>
+                        <option value="3">۳ ستاره</option>
+                        <option value="2">۲ ستاره</option>
+                        <option value="1">۱ ستاره</option>
+                      </select>
+                    </div>
+                    <div class="mb-2">
+                      <textarea id="reviewText" class="form-control" rows="3" placeholder="نظر خود را بنویسید..." required></textarea>
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button class="btn btn-primary" type="submit">ارسال نظر</button>
+                      <button class="btn btn-outline-secondary" type="reset">پاک کردن</button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Reviews List -->
+                <div id="reviewsList">
+                  <!-- نمونه نظرات -->
+                  <div class="mb-3">
+                    <strong>زهرا محمدی</strong> <span class="text-warning ms-2">⭐️⭐️⭐️⭐️⭐️</span>
+                    <div class="small text-muted">۲ روز پیش</div>
+                    <p class="mb-0">دوره بسیار مفید و کاربردی بود. تکنیک‌ها خیلی عملی بودند.</p>
+                  </div>
+
+                  <div class="mb-3">
+                    <strong>علی رضایی</strong> <span class="text-warning ms-2">⭐️⭐️⭐️⭐️☆</span>
+                    <div class="small text-muted">۱ هفته پیش</div>
+                    <p class="mb-0">کیفیت مطالب خوب بود؛ فقط کمی جزئیات کمتر بود.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- پرسش و پاسخ -->
+          <div class="tab-pane fade" id="qna" role="tabpanel">
+            <section class="pt-2 bg-white p-4 rounded shadow-sm">
+              <h5 class="mb-3">پرسش و پاسخ</h5>
+              <p class="small text-muted mb-3">سوال خود را درباره دوره مطرح کنید؛ مدرس یا دیگر دانشجویان پاسخ می‌دهند.</p>
+              <div class="mb-3">
+                <textarea class="form-control" rows="3" placeholder="سوال خود را وارد کنید..."></textarea>
+              </div>
+              <button class="btn btn-primary">ارسال سوال</button>
+
+              <hr class="my-4">
+              <div>
+                <div class="mb-3">
+                  <strong>مریم کریمی</strong>
+                  <div class="small text-muted">۲ روز پیش</div>
+                  <p class="mb-0">آیا این دوره گواهی پایان دارد؟</p>
+                </div>
+                <div class="mb-3">
+                  <strong>پاسخ از مدرس:</strong>
+                  <div class="small text-muted">۱ روز پیش</div>
+                  <p class="mb-0">بله؛ گواهی PDF پس از اتمام دوره صادر می‌شود.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="col-lg-4">
+        <div class="sidebar-sticky">
+          <!-- Enroll Card -->
+          <div class="sidebar-card mb-3" data-aos="fade-left">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <div class="small text-muted">قیمت</div>
+                <div class="course-price">۱٬۲۰۰٬۰۰۰ تومان</div>
+              </div>
+              <div class="small text-muted text-end">
+                <div>۴۵ دقیقه جلسه</div>
+                <div>گواهی دارد</div>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#enrollModal">
+              خرید / ثبت‌نام
+            </button>
+            <button class="btn btn-outline-secondary w-100" onclick="addToWishlistCourse()">
+              <i class="bi bi-heart" id="courseWishlistIcon"></i> افزودن به علاقه‌مندی‌ها
+            </button>
+          </div>
+
+          <!-- Instructor Card -->
+          <div class="sidebar-card mb-3" data-aos="fade-left" data-aos-delay="100">
+            <div class="text-center">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" class="rounded-circle mb-3" width="120" height="120" alt="instructor">
+              <h5 class="mb-0">دکتر مریم احمدی</h5>
+              <div class="small text-muted mb-2">روانشناس بالینی</div>
+              <p class="small text-muted">دارای ۱۰+ سال تجربه در حوزه درمان استرس و اضطراب.</p>
+              <a href="psychologist-profile.html?id=1" class="btn btn-outline-primary w-100 mb-2">مشاهده پروفایل</a>
+              <a href="booking.html?psychologist=1" class="btn btn-primary w-100">رزرو جلسه</a>
+            </div>
+          </div>
+
+          <!-- What you will get -->
+          <div class="sidebar-card mb-3" data-aos="fade-left" data-aos-delay="200">
+            <h6>شما در این دوره دریافت می‌کنید</h6>
+            <ul class="small">
+              <li>دسترسی مادام‌العمر</li>
+              <li>گواهی پایان دوره</li>
+              <li>پشتیبانی مدرس</li>
+              <li>فصل‌های قابل دانلود</li>
+            </ul>
+          </div>
+
+          <!-- Related Courses -->
+          <div class="sidebar-card" data-aos="fade-left" data-aos-delay="300">
+            <h6>دوره‌های مرتبط</h6>
+            <div class="mt-3">
+              <div class="d-flex align-items-center mb-3">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=300&q=80" style="width:70px;height:70px;object-fit:cover;border-radius:8px" class="me-2">
+                <div>
+                  <a href="course-detail.html?id=2" class="text-dark">مدیریت اضطراب برای مبتدیان</a>
+                  <div class="small text-muted">۱۹۹,۰۰۰ تومان</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=300&q=80" style="width:70px;height:70px;object-fit:cover;border-radius:8px" class="me-2">
+                <div>
+                  <a href="course-detail.html?id=3" class="text-dark">تکنیک‌های تنفس</a>
+                  <div class="small text-muted">۱۴۹,۰۰۰ تومان</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Floating enroll (mobile) -->
+  <div class="floating-enroll d-md-none">
+    <button class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#enrollModal">
+      ثبت‌نام — ۱٬۲۰۰٬۰۰۰ تومان
+    </button>
+  </div>
+
+  <!-- ENROLL Modal -->
+  <div class="modal fade" id="enrollModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ثبت‌نام در دوره — مدیریت استرس پیشرفته</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-3">لطفاً روش پرداخت را انتخاب کنید:</p>
+          <div class="list-group">
+            <label class="list-group-item">
+              <input class="form-check-input me-2" type="radio" name="payMethod" checked> پرداخت آنلاین (درگاه)
+            </label>
+            <label class="list-group-item">
+              <input class="form-check-input me-2" type="radio" name="payMethod"> کیف پول داخلی
+            </label>
+            <label class="list-group-item">
+              <input class="form-check-input me-2" type="radio" name="payMethod"> کارت به کارت
+            </label>
+          </div>
+          <div class="mt-3 small text-muted">
+            پس از پرداخت، دسترسی به دوره برای شما فعال می‌شود و ایمیل تأیید دریافت خواهید کرد.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+          <button class="btn btn-success" onclick="simulateEnroll()">پرداخت و ثبت‌نام</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview Lesson Modal -->
+  <div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">پیش‌نمایش درس</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="ratio ratio-16x9">
+            <iframe id="previewFrame" src="" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Modal -->
+  <div class="modal fade" id="shareModal" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title">اشتراک‌گذاری دوره</h6>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-primary" onclick="share('telegram')"><i class="bi bi-telegram"></i></button>
+            <button class="btn btn-success" onclick="share('whatsapp')"><i class="bi bi-whatsapp"></i></button>
+            <button class="btn btn-info" onclick="share('linkedin')"><i class="bi bi-linkedin"></i></button>
+            <button class="btn btn-secondary" onclick="share('copy')"><i class="bi bi-link-45deg"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENROLL SUCCESS Modal -->
+  <div class="modal fade" id="enrollSuccessModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-body py-4">
+          <i class="bi bi-check-circle-fill text-success fs-1"></i>
+          <h5 class="mt-3">ثبت‌نام شما با موفقیت انجام شد!</h5>
+          <p class="small text-muted">دسترسی شما به دوره فعال شد. ایمیل تأیید ارسال شد.</p>
+          <a href="course-player.html?course=123" class="btn btn-primary mt-2">شروع دوره</a>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4" data-aos="fade-up">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین با بهترین متخصصان روانشناسی کشور</p>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5>دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li class="mb-2"><a href="psychologists.html" class="text-white-50">مشاوران</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li class="mb-2"><a href="courses.html" class="text-white-50">دوره‌های آموزشی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li class="mb-2"><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li class="mb-2"><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک، پلاک ۱۲۳</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3" data-aos="fade-up">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+                <div class="mt-2">
+                    <a href="privacy.html" class="me-3 text-white-50">حریم خصوصی</a>
+                    <a href="terms.html" class="me-3 text-white-50">شرایط استفاده</a>
+                    <a href="faq.html" class="text-white-50">سوالات متداول</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  <!-- AOS & Bootstrap JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script> AOS.init({once:true,duration:700}); </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Inline JS (قابل جدا شدن در assets/js/course-detail.js در مراحل بعدی) -->
+  
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "مدیریت استرس پیشرفته",
+    "description": "دوره‌ای عملی برای مدیریت استرس و افزایش تاب‌آوری روانی شامل ویدیو، تمرین و پشتیبانی مدرس.",
+    "provider": {
+      "@type": "Organization",
+      "name": "PsyClinic",
+      "sameAs": "https://psyclinic.ir"
+    },
+    "instructor": {
+      "@type": "Person",
+      "name": "دکتر مریم احمدی"
+    }
+  }
+  </script>
+  <script src="assets/js/course-detail.js"></script>
+</body>
+</html>

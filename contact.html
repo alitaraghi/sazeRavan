@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با ما - PsyClinic</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="تماس با PsyClinic - کلینیک مجازی تخصصی روانشناسی و مشاوره آنلاین">
+    <meta name="keywords" content="تماس, روانشناسی, مشاوره, کلینیک, PsyClinic, ایران">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://psyclinic.ir/contact.html">
+    <meta property="og:title" content="تماس با ما - PsyClinic">
+    <meta property="og:description" content="با ما در ارتباط باشید - هر زمان که نیاز دارید">
+    <meta property="og:image" content="https://psyclinic.ir/images/contact-hero.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://psyclinic.ir/contact.html">
+    <meta property="twitter:title" content="تماس با ما - PsyClinic">
+    <meta property="twitter:description" content="با ما در ارتباط باشید - هر زمان که نیاز دارید">
+    <meta property="twitter:image" content="https://psyclinic.ir/images/contact-hero.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "PsyClinic",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "info@psyclinic.ir",
+                "telephone": "+982112345678",
+                "contactType": "customer service",
+                "availableLanguage": "fa"
+            }
+        }
+    }
+    </script>
+
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS for Contact Page -->
+    <style>
+        .contact-hero {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(76, 201, 240, 0.05)),
+                        url('https://images.unsplash.com/photo-1497366757748-718e9bde7d3d?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-info-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-info-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .contact-info-text {
+            margin-bottom: 0;
+            color: #495057;
+        }
+
+        .contact-info-link {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .contact-info-link:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .faq-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .faq-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-header {
+            padding: 20px;
+            background: #f1f5f9;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-header:hover {
+            background: #e2e8f0;
+        }
+
+        .faq-body {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-body.show {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-header[aria-expanded="true"] .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .required::after {
+            content: " *";
+            color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero {
+                height: auto;
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="sticky-top bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="bi bi-house-door me-1"></i>صفحه اصلی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i>درباره ما
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">
+                                <i class="bi bi-journal-text me-1"></i>وبلاگ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="courses.html">
+                                <i class="bi bi-book me-1"></i>دوره‌های آموزشی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="psychologists.html">
+                                <i class="bi bi-people me-1"></i>مشاوران
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="contact.html">
+                                <i class="bi bi-envelope me-1"></i>تماس با ما
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary me-2">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>ورود
+                        </a>
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i>ثبت‌نام
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="contact-hero">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-4" data-aos="fade-up">تماس با ما</h1>
+            <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">
+                سوال یا پیشنهادی دارید؟ با ما تماس بگیرید یا فرم زیر را پر کنید.
+            </p>
+            <a href="#contactForm" class="btn btn-light btn-lg" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-envelope me-2"></i>ارسال پیام
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT INFORMATION -->
+    <section class="container py-5">
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <h4 class="contact-info-title">آدرس</h4>
+                    <p class="contact-info-text">
+                        تهران، خیابان ولی‌عصر، بالاتر از پارک ساعی، پلاک ۱۲۰۱، واحد ۳۰۲
+                    </p>
+                    <a href="https://goo.gl/maps/example" target="_blank" class="contact-info-link mt-2 d-block">
+                        <i class="bi bi-arrow-left me-1"></i>مشاهده روی نقشه
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <h4 class="contact-info-title">تلفن</h4>
+                    <p class="contact-info-text">
+                        <a href="tel:+982112345678" class="contact-info-link">۰۲۱-۱۲۳۴۵۶۷۸</a>
+                    </p>
+                    <p class="contact-info-text mt-2">
+                        <a href="tel:+989123456789" class="contact-info-link">۰۹۱۲-۳۴۵۶۷۸۹</a> (پشتیبانی)
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <h4 class="contact-info-title">ایمیل</h4>
+                    <p class="contact-info-text">
+                        <a href="mailto:info@psyclinic.ir" class="contact-info-link">info@psyclinic.ir</a>
+                    </p>
+                    <p class="contact-info-text mt-2">
+                        <a href="mailto:support@psyclinic.ir" class="contact-info-link">support@psyclinic.ir</a> (پشتیبانی فنی)
+                    </p>
+                </div>
+            </div>
+            <div class="col-12" data-aos="fade-up" data-aos-delay="600">
+                <div class="contact-info-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-clock"></i>
+                    </div>
+                    <h4 class="contact-info-title">ساعات کار</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <p class="contact-info-text mb-1"><strong>شنبه تا چهارشنبه:</strong></p>
+                            <p class="contact-info-text">۸:۰۰ صبح تا ۸:۰۰ شب</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p class="contact-info-text mb-1"><strong>پنجشنبه:</strong></p>
+                            <p class="contact-info-text">۸:۰۰ صبح تا ۵:۰۰ عصر</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="contact-info-text mb-1"><strong>جمعه و تعطیلات رسمی:</strong></p>
+                            <p class="contact-info-text">تعطیل</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM & MAP -->
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5" data-aos="fade-up">
+                <h2 class="mb-4">ارسال پیام</h2>
+                <p class="mb-4">
+                    لطفاً برای ارتباط با ما، فرم زیر را با دقت پر کنید. پاسخ شما در اسرع وقت ارسال خواهد شد.
+                </p>
+                <form id="contactForm">
+                    <!-- Honeypot Field -->
+                    <div class="mb-3 hidden">
+                        <label for="website" class="form-label">Leave this field empty</label>
+                        <input type="text" class="form-control" id="website" name="website">
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label required">نام و نام خانوادگی</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label required">ایمیل</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="subject" class="form-label required">موضوع</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="message" class="form-label required">پیام شما</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="requestType" class="form-label">نوع درخواست</label>
+                            <select class="form-select" id="requestType" name="requestType">
+                                <option value="">انتخاب کنید...</option>
+                                <option value="consultation">درخواست مشاوره</option>
+                                <option value="support">پشتیبانی فنی</option>
+                                <option value="billing">پرسش مالی</option>
+                                <option value="other">سایر</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="priority" class="form-label">اولویت</label>
+                            <select class="form-select" id="priority" name="priority">
+                                <option value="low">پایین</option>
+                                <option value="medium" selected>متوسط</option>
+                                <option value="high">بالا</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                <label class="form-check-label" for="newsletter">
+                                    اشتراک در خبرنامه (دریافت جدیدترین مقالات و تخفیف‌ها)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-send me-2"></i>ارسال پیام
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.998111022469!2d51.38897331525848!3d35.70061708018854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e0147c1c5c4e9%3A0x9a8a7d1d9e3a4f4a!2sTehran%20Province%2C%20Tehran%2C%20District%201%2C%20Valiasr%20St%2C%20Iran!5e0!3m2!1sen!2s!4v1710686358441!5m2!1sen!2s" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">پرسش‌های متداول</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="faq-card" data-aos="fade-up">
+                        <div class="faq-header" id="faqHeading1" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                            <h5 class="mb-0">چطور می‌توانم یک مشاور را رزرو کنم؟</h5>
+                            <i class="bi bi-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faqCollapse1" class="faq-body collapse show" aria-labelledby="faqHeading1">
+                            <p>برای رزرو وقت مشاوره، به صفحه <a href="psychologists.html" class="text-decoration-none">مشاوران</a> بروید، مشاور مورد نظر خود را انتخاب کنید و روی دکمه "رزرو وقت" کلیک کنید. سپس تاریخ و زمان مورد نظر خود را انتخاب و مراحل ثبت‌نام را دنبال کنید.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="faq-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="faq-header" id="faqHeading2" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                            <h5 class="mb-0">آیا مشاوره آنلاین به اندازهٔ حضوری مؤثر است؟</h5>
+                            <i class="bi bi-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faqCollapse2" class="faq-body collapse" aria-labelledby="faqHeading2">
+                            <p>بله، مطالعات نشان داده‌اند که مشاوره آنلاین در بسیاری از موارد به اندازهٔ مشاوره حضوری مؤثر است. با توجه به راحتی و دسترسی بیشتر، بسیاری از افراد ترجیح می‌دهند از این روش استفاده کنند.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="faq-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="faq-header" id="faqHeading3" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                            <h5 class="mb-0">هزینهٔ مشاوره چقدر است؟</h5>
+                            <i class="bi bi-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faqCollapse3" class="faq-body collapse" aria-labelledby="faqHeading3">
+                            <p>هزینهٔ مشاوره به تخصص مشاور، نوع خدمت و مدت زمان جلسه بستگی دارد. معمولاً هزینه‌های مشاوره از ۱۵۰,۰۰۰ تا ۳۰۰,۰۰۰ تومان متغیر است. برای اطلاع از هزینه‌های دقیق، به صفحه پروفایل هر مشاور مراجعه کنید.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="faq-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="faq-header" id="faqHeading4" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                            <h5 class="mb-0">چطور می‌توانم از تخفیف‌ها مطلع شوم؟</h5>
+                            <i class="bi bi-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faqCollapse4" class="faq-body collapse" aria-labelledby="faqHeading4">
+                            <p>برای اطلاع از آخرین تخفیف‌ها و پیشنهادات ویژه، می‌توانید به <a href="blog.html" class="text-decoration-none">وبلاگ</a> ما مراجعه کنید یا در <a href="#" class="text-decoration-none">خبرنامه</a> ما عضو شوید.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="faq-card" data-aos="fade-up" data-aos-delay="800">
+                        <div class="faq-header" id="faqHeading5" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                            <h5 class="mb-0">آیا اطلاعات من محرمانه خواهد بود؟</h5>
+                            <i class="bi bi-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faqCollapse5" class="faq-body collapse" aria-labelledby="faqHeading5">
+                            <p>بله، تمام اطلاعات شما به صورت کاملاً محرمانه نگهداری می‌شود و تنها مشاور مربوطه به آن‌ها دسترسی خواهد داشت. ما از آخرین استانداردهای امنیتی برای حفاظت از داده‌های کاربران استفاده می‌کنیم.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="faq-card" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="faq-header" id="faqHeading6" data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="false" aria-controls="faqCollapse6">
+                            <h5 class="mb-0">اگر مشکلی در سایت پیش بیاید چطور باید گزارش دهم؟</h5>
+                            <i class="bi bi-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faqCollapse6" class="faq-body collapse" aria-labelledby="faqHeading6">
+                            <p>لطفاً هرگونه مشکل فنی را از طریق فرم تماس، با انتخاب موضوع "پشتیبانی فنی" برای ما ارسال کنید. تیم فنی ما در اسرع وقت مشکل را بررسی خواهد کرد.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-3 fw-bold mb-4" data-aos="fade-up">آماده‌اید با یک مشاور حرفه‌ای صحبت کنید؟</h2>
+            <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">
+                همین حالا وقت خود را رزرو کنید و اولین گام را به سوی سلامت روان بردارید
+            </p>
+            <a href="booking.html" class="btn btn-light btn-lg" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-calendar-check me-2"></i>رزرو وقت مشاوره
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li><a href="courses.html" class="text-white-50">دوره‌های آموزشی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                        <li><a href="terms.html" class="text-white-50">شرایط استفاده</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک</li>
+                        <li><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Form Validation
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Simple validation
+            if(name && email && subject && message) {
+                // Show success message
+                alert('پیام شما با موفقیت ارسال شد! در اسرع وقت با شما تماس خواهیم گرفت.');
+                // Reset form
+                this.reset();
+            } else {
+                alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+            }
+        });
+
+        // FAQ Accordion
+        const faqHeaders = document.querySelectorAll('.faq-header');
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const faqBody = this.nextElementSibling;
+                faqBody.classList.toggle('show');
+            });
+        });
+
+        // Sticky Navbar for mobile
+        const navbar = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

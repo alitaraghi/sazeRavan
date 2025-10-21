@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مشاور - دکتر مریم احمدی - PsyClinic</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="پنل مدیریت حرفه‌ای برای مشاوران روانشناسی PsyClinic. مدیریت جلسات، مراجعین، وبلاگ و دوره‌های آموزشی.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS (for general styling) -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- FullCalendar CSS (for calendar functionality - simplified for static demo) -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/main.min.css' rel='stylesheet' />
+
+    <!-- Custom CSS for Dashboard -->
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .dashboard-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: 100%; /* Adjust to fill available height */
+            position: sticky;
+            top: 20px; /* Space from top */
+            padding: 20px 0;
+            overflow-y: auto; /* For long sidebar content */
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-radius: 8px; /* Rounded corners for nav items */
+            margin: 0 10px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-nav i {
+            margin-left: 10px;
+            font-size: 1.1rem;
+        }
+
+        .main-content-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .profile-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 10px 15px;
+        }
+
+        .btn {
+            border-radius: 8px;
+            padding: 10px 20px;
+        }
+
+        .client-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 10px;
+        }
+
+        .table thead th {
+            background-color: #f1f5f9;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fullcalendar-container {
+            direction: ltr; /* FullCalendar might need LTR context for rendering */
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .fc-toolbar-title { /* Custom font for FullCalendar title */
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Floating Action Buttons */
+        .floating-action-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .fab-button {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .fab-button:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+
+        .fab-tooltip {
+            position: absolute;
+            left: -150px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .fab-button:hover .fab-tooltip {
+            opacity: 1;
+        }
+
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                top: 0;
+                height: auto;
+                margin-bottom: 20px;
+            }
+            .sidebar-nav a {
+                margin: 0;
+                border-radius: 0;
+            }
+            .floating-action-buttons {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="dashboard-header d-flex justify-content-between align-items-center px-4">
+        <h4 class="mb-0">پنل مشاور</h4>
+        <div>
+            <span class="text-white me-3">دکتر مریم احمدی</span>
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=50&q=80" 
+                 alt="آواتار مشاور" class="rounded-circle me-2" width="40" height="40">
+            <a href="login.html" class="btn btn-outline-light btn-sm">خروج</a>
+        </div>
+    </header>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- SIDEBAR -->
+            <div class="col-lg-3">
+                <nav class="sidebar">
+                    <ul class="sidebar-nav">
+                        <li><a href="#dashboard" class="active" onclick="loadSection('dashboard')">
+                            <i class="bi bi-house-door"></i>داشبورد
+                        </a></li>
+                        <li><a href="#profile" onclick="loadSection('profile')">
+                            <i class="bi bi-person"></i>پروفایل
+                        </a></li>
+                        <li><a href="#calendar" onclick="loadSection('calendar')">
+                            <i class="bi bi-calendar-check"></i>تقویم و جلسات
+                        </a></li>
+                        <li><a href="#clients" onclick="loadSection('clients')">
+                            <i class="bi bi-people"></i>پرونده مراجعین
+                        </a></li>
+                        <li><a href="#blog" onclick="loadSection('blog')">
+                            <i class="bi bi-journal-text"></i>وبلاگ
+                        </a></li>
+                        <li><a href="#courses" onclick="loadSection('courses')">
+                            <i class="bi bi-book"></i>دوره‌های آموزشی
+                        </a></li>
+                        <li><a href="#finances" onclick="loadSection('finances')">
+                            <i class="bi bi-currency-dollar"></i>مالی
+                        </a></li>
+                        <li><a href="#messages" onclick="loadSection('messages')">
+                            <i class="bi bi-chat-text"></i>پیام‌رسانی
+                        </a></li>
+                        <li><a href="#session-room" onclick="loadSection('session-room')">
+                            <i class="bi bi-camera-video"></i>اتاق جلسات
+                        </a></li>
+                        <li><a href="#settings" onclick="loadSection('settings')">
+                            <i class="bi bi-gear"></i>تنظیمات
+                        </a></li>
+                        <li><a href="#" onclick="logout()">
+                            <i class="bi bi-box-arrow-right"></i>خروج
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- MAIN CONTENT AREA -->
+            <div class="col-lg-9">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="main-content-section" data-aos="fade-up">
+                    <h2 class="mb-4">داشبورد مشاور</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4" data-aos="fade-up">
+                            <div class="stat-card">
+                                <div class="stat-number">۵</div>
+                                <div class="stat-label">جلسه آینده</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="stat-card">
+                                <div class="stat-number">۲,۸۰۰,۰۰۰</div>
+                                <div class="stat-label">درآمد این ماه (تومان)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="stat-card">
+                                <div class="stat-number">۱۸</div>
+                                <div class="stat-label">مراجع فعال</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5" data-aos="fade-up" data-aos-delay="300">
+                        <h4>فعالیت‌های اخیر</h4>
+                        <ul class="list-group list-group-flush mt-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>جلسه با علی رضایی</span>
+                                <small class="text-muted">۱۵ خرداد ۱۴۰۴</small>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>پست جدید وبلاگ: "مدیریت استرس"</span>
+                                <small class="text-muted">۱۰ خرداد ۱۴۰۴</small>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>دوره جدید: "مدیریت اضطراب"</span>
+                                <small class="text-muted">۵ خرداد ۱۴۰۴</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile" class="main-content-section hidden">
+                    <h2 class="mb-4">مدیریت پروفایل</h2>
+                    <div class="card p-4 mb-4">
+                        <h5>اطلاعات عمومی</h5>
+                        <div class="text-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80" 
+                                 class="profile-avatar-large rounded-circle mb-3" alt="دکتر مریم احمدی">
+                            <input type="file" class="form-control w-auto mx-auto" accept="image/*">
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">نام</label><input type="text" class="form-control" value="مریم"></div>
+                            <div class="col-md-6"><label class="form-label">نام خانوادگی</label><input type="text" class="form-control" value="احمدی"></div>
+                            <div class="col-12"><label class="form-label">تخصص</label><input type="text" class="form-control" value="روانشناس بالینی، CBT"></div>
+                            <div class="col-12"><label class="form-label">بیوگرافی</label><textarea class="form-control" rows="4">روانشناس بالینی با بیش از ۱۰ سال تجربه در درمان اضطراب، افسردگی و اختلالات خلقی.</textarea></div>
+                            <div class="col-md-6"><label class="form-label">شماره تماس</label><input type="tel" class="form-control" value="۰۲۱-۱۲۳۴۵۶۷۸"></div>
+                            <div class="col-md-6"><label class="form-label">ایمیل</label><input type="email" class="form-control" value="dr.ahmadi@psyclinic.ir" disabled></div>
+                            <div class="col-12"><label class="form-label">آدرس دفتر</label><input type="text" class="form-control" value="تهران، ولنجک، خیابان..."></div>
+                        </div>
+                        <button class="btn btn-primary mt-4">ذخیره تغییرات</button>
+                    </div>
+                    <div class="card p-4">
+                        <h5>ویدیوی معرفی</h5>
+                        <p class="text-muted small">این ویدیو در صفحه پروفایل عمومی شما نمایش داده می‌شود.</p>
+                        <div class="ratio ratio-16x9 mb-3" style="max-height: 250px;">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        </div>
+                        <input type="file" class="form-control w-auto mb-3" accept="video/*">
+                        <button class="btn btn-outline-secondary">آپلود ویدیو جدید</button>
+                    </div>
+                </div>
+
+                <!-- Calendar and Sessions Section -->
+                <div id="calendar" class="main-content-section hidden">
+                    <h2 class="mb-4">تقویم و جلسات</h2>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5>تنظیمات تقویم</h5>
+                        <button class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-1"></i>افزودن زمان کاری
+                        </button>
+                    </div>
+                    <div class="card p-4 mb-4">
+                        <p class="text-muted small">شما می‌توانید ساعات کاری و روزهای مرخصی خود را تنظیم کنید.</p>
+                        <!-- FullCalendar will be initialized here by JS -->
+                        <div id='calendar-container' class="fullcalendar-container"></div>
+                    </div>
+
+                    <h4 class="mt-5 mb-4">جلسات آینده</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead><tr><th>مراجع</th><th>تاریخ</th><th>ساعت</th><th>نوع</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="https://via.placeholder.com/40x40.png?text=Clt" class="client-avatar">علی رضایی</td>
+                                    <td>۱۵ خرداد ۱۴۰۴</td>
+                                    <td>۱۰:۰۰</td>
+                                    <td>فردی</td>
+                                    <td><span class="badge bg-warning text-dark">در انتظار</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-success me-2">تأیید</button>
+                                        <button class="btn btn-sm btn-danger">لغو</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="https://via.placeholder.com/40x40.png?text=Clt" class="client-avatar">سارا محمدی</td>
+                                    <td>۲۰ خرداد ۱۴۰۴</td>
+                                    <td>۱۴:۰۰</td>
+                                    <td>گروهی</td>
+                                    <td><span class="badge bg-success">تأیید شده</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary me-2">ورود به جلسه</button>
+                                        <button class="btn btn-sm btn-danger">لغو</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Clients Section -->
+                <div id="clients" class="main-content-section hidden">
+                    <h2 class="mb-4">پرونده مراجعین</h2>
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control" placeholder="جستجوی مراجع (نام، ایمیل، تلفن)">
+                        <button class="btn btn-outline-primary" type="button"><i class="bi bi-search"></i></button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead><tr><th>مراجع</th><th>آخرین جلسه</th><th>تعداد جلسات</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="https://via.placeholder.com/40x40.png?text=Clt" class="client-avatar">علی رضایی</td>
+                                    <td>۱۵ خرداد ۱۴۰۴</td>
+                                    <td>۵</td>
+                                    <td><span class="badge bg-primary">فعال</span></td>
+                                    <td><button class="btn btn-sm btn-info text-white">مشاهده پرونده</button></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="https://via.placeholder.com/40x40.png?text=Clt" class="client-avatar">فاطمه کریمی</td>
+                                    <td>۱۰ اردیبهشت ۱۴۰۴</td>
+                                    <td>۲</td>
+                                    <td><span class="badge bg-secondary">غیرفعال</span></td>
+                                    <td><button class="btn btn-sm btn-info text-white">مشاهده پرونده</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Blog Section -->
+                <div id="blog" class="main-content-section hidden">
+                    <h2 class="mb-4">مدیریت وبلاگ شخصی</h2>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5>پست‌های شما</h5>
+                        <button class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-1"></i>پست جدید
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead><tr><th>عنوان</th><th>تاریخ انتشار</th><th>بازدید</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td>چگونه با اضطراب کنار بیاییم؟</td>
+                                    <td>۱ خرداد ۱۴۰۴</td>
+                                    <td>۱۲۴۵</td>
+                                    <td><span class="badge bg-success">منتشر شده</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                                        <button class="btn btn-sm btn-danger">حذف</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تکنیک‌های تنفس برای آرامش</td>
+                                    <td>در حال آماده‌سازی</td>
+                                    <td>۰</td>
+                                    <td><span class="badge bg-warning text-dark">پیش‌نویس</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                                        <button class="btn btn-sm btn-danger">حذف</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Courses Section -->
+                <div id="courses" class="main-content-section hidden">
+                    <h2 class="mb-4">مدیریت دوره‌های آموزشی</h2>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5>دوره‌های شما</h5>
+                        <button class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-1"></i>دوره جدید
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead><tr><th>عنوان دوره</th><th>قیمت</th><th>دانشجویان</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td>مدیریت اضطراب برای مبتدیان</td>
+                                    <td>۹۹۰,۰۰۰ تومان</td>
+                                    <td>۲۵</td>
+                                    <td><span class="badge bg-success">فعال</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                                        <button class="btn btn-sm btn-danger">حذف</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تکنیک‌های پیشرفته CBT</td>
+                                    <td>۱,۲۰۰,۰۰۰ تومان</td>
+                                    <td>۱۰</td>
+                                    <td><span class="badge bg-warning text-dark">در حال آماده‌سازی</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info text-white">ویرایش</button>
+                                        <button class="btn btn-sm btn-danger">حذف</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Finances Section -->
+                <div id="finances" class="main-content-section hidden">
+                    <h2 class="mb-4">مالی و حسابداری</h2>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6" data-aos="fade-up">
+                            <div class="stat-card">
+                                <div class="stat-number">۱۲,۵۰۰,۰۰۰</div>
+                                <div class="stat-label">کل درآمد (تومان)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="stat-card">
+                                <div class="stat-number">۳,۵۰۰,۰۰۰</div>
+                                <div class="stat-label">موجودی قابل برداشت (تومان)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mb-4">
+                        <i class="bi bi-wallet me-1"></i>درخواست برداشت
+                    </button>
+                    
+                    <h4 class="mt-4 mb-4">تراکنش‌های اخیر</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead><tr><th>تاریخ</th><th>مبلغ (تومان)</th><th>نوع</th><th>وضعیت</th></tr></thead>
+                            <tbody>
+                                <tr><td>۱۵ خرداد ۱۴۰۴</td><td>۱۵۰,۰۰۰</td><td>درآمد جلسه</td><td><span class="badge bg-success">کامل شد</span></td></tr>
+                                <tr><td>۱۰ خرداد ۱۴۰۴</td><td>۷۵۰,۰۰۰</td><td>درآمد دوره</td><td><span class="badge bg-success">کامل شد</span></td></tr>
+                                <tr><td>۵ خرداد ۱۴۰۴</td><td>۳۰۰,۰۰۰</td><td>برداشت</td><td><span class="badge bg-warning text-dark">در انتظار</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Messages Section -->
+                <div id="messages" class="main-content-section hidden">
+                    <h2 class="mb-4">پیام‌رسانی</h2>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5>صندوق پیام</h5>
+                        <button class="btn btn-outline-primary">
+                            <i class="bi bi-send me-1"></i>ارسال پیام گروهی
+                        </button>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>علی رضایی</h6>
+                                <p class="mb-0 small text-muted">سلام، جلسه آینده را لغو می‌کنم؟</p>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">۱</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6>فاطمه کریمی</h6>
+                                <p class="mb-0 small text-muted">ممنون بابت جلسه امروز!</p>
+                            </div>
+                            <span></span>
+                        </li>
+                    </ul>
+                    <div class="card p-4 mt-4">
+                        <h5>ارسال پیام جدید</h5>
+                        <div class="mb-3">
+                            <label class="form-label">گیرنده</label>
+                            <input type="text" class="form-control" placeholder="نام مراجع یا گروه">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">پیام</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-primary">ارسال</button>
+                    </div>
+                </div>
+
+                <!-- Session Room Section -->
+                <div id="session-room" class="main-content-section hidden">
+                    <h2 class="mb-4">اتاق جلسات</h2>
+                    <p class="lead">جلسات ویدیویی زنده و مدیریت ضبط‌ها.</p>
+                    <div class="card p-4 mb-4">
+                        <h5>جلسات آینده</h5>
+                        <ul class="list-group list-group-flush mt-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>جلسه با علی رضایی - ۱۵ خرداد ۱۴۰۴، ۱۰:۰۰</span>
+                                <a href="virtual-session-room.html?session=abc" class="btn btn-sm btn-success">
+                                    <i class="bi bi-camera-video me-1"></i>ورود به جلسه
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card p-4">
+                        <h5>جلسات برگزار شده</h5>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-striped align-middle">
+                                <thead><tr><th>مراجع</th><th>تاریخ</th><th>عملیات</th></tr></thead>
+                                <tbody>
+                                    <tr>
+                                        <td>علی رضایی</td>
+                                        <td>۱۰ خرداد ۱۴۰۴</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-2">مشاهده ضبط</button>
+                                            <button class="btn btn-sm btn-outline-info text-dark">مشاهده متن</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings" class="main-content-section hidden">
+                    <h2 class="mb-4">تنظیمات</h2>
+                    <div class="card p-4 mb-4">
+                        <h5>حساب کاربری</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">ایمیل</label><input type="email" class="form-control" value="dr.ahmadi@psyclinic.ir" disabled></div>
+                            <div class="col-md-6"><label class="form-label">شماره ملی</label><input type="text" class="form-control" value="۱۲۳۴۵۶۷۸۹۰" disabled></div>
+                        </div>
+                        <button class="btn btn-primary mt-3">بروزرسانی</button>
+                    </div>
+                    <div class="card p-4 mb-4">
+                        <h5>امنیت</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">رمز عبور فعلی</label><input type="password" class="form-control"></div>
+                            <div class="col-md-6"><label class="form-label">رمز عبور جدید</label><input type="password" class="form-control"></div>
+                            <div class="col-12"><label class="form-label">تکرار رمز عبور جدید</label><input type="password" class="form-control"></div>
+                        </div>
+                        <button class="btn btn-primary mt-3">تغییر رمز عبور</button>
+                    </div>
+                    <div class="card p-4">
+                        <h5>اطلاعات بانکی (برای تسویه)</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">شماره شبا</label><input type="text" class="form-control" value="IR123456789012345678901234"></div>
+                            <div class="col-md-6"><label class="form-label">نام صاحب حساب</label><input type="text" class="form-control" value="مریم احمدی"></div>
+                        </div>
+                        <button class="btn btn-primary mt-3">ذخیره اطلاعات بانکی</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-action-buttons">
+        <a href="booking.html" class="fab-button" title="رزرو جلسه جدید">
+            <i class="bi bi-calendar-plus"></i>
+            <span class="fab-tooltip">رزرو جلسه جدید</span>
+        </a>
+        <a href="blog.html?new-post=true" class="fab-button" title="ایجاد پست جدید">
+            <i class="bi bi-pencil-square"></i>
+            <span class="fab-tooltip">ایجاد پست جدید</span>
+        </a>
+        <a href="messages.html?new-group=true" class="fab-button" title="ارسال پیام گروهی">
+            <i class="bi bi-chat-dots"></i>
+            <span class="fab-tooltip">ارسال پیام گروهی</span>
+        </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0 small">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FullCalendar JS (core + interaction + daygrid) - for static demo, no dynamic events -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+    <!-- Custom JavaScript for Dashboard -->
+    <script>
+        // Function to load sections dynamically
+        function loadSection(sectionId) {
+            // Hide all main content sections
+            document.querySelectorAll('.main-content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            // Update active state in sidebar navigation
+            document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.sidebar-nav a[href="#${sectionId}"]`).classList.add('active');
+
+            // Initialize calendar if it's the calendar section
+            if (sectionId === 'calendar') {
+                initializeCalendar();
+            }
+        }
+
+        // Initialize FullCalendar (simplified for static demo)
+        function initializeCalendar() {
+            const calendarEl = document.getElementById('calendar-container');
+            if (calendarEl && !calendarEl.hasAttribute('data-initialized')) {
+                let calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale: 'fa', // Set Persian locale
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    buttonText: { // Custom button text for Persian
+                        today: 'امروز',
+                        month: 'ماه',
+                        week: 'هفته',
+                        day: 'روز'
+                    },
+                    events: [
+                        // Sample events
+                        { title: 'جلسه با علی (۱۰:۰۰)', start: '2024-06-15T10:00:00', backgroundColor: '#28a745' },
+                        { title: 'جلسه با سارا (۱۴:۰۰)', start: '2024-06-20T14:00:00', backgroundColor: '#ffc107' },
+                        { title: 'مرخصی', start: '2024-06-21', display: 'background', color: '#dc3545' }
+                    ],
+                    // Additional FullCalendar options (e.g., eventClick, dateClick) would go here
+                });
+                calendar.render();
+                calendarEl.setAttribute('data-initialized', 'true'); // Prevent re-initialization
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('آیا مطمئن هستید که می‌خواهید خارج شوید؟')) {
+                window.location.href = 'login.html'; // Redirect to login page
+            }
+        }
+
+        // Initialize dashboard on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSection('dashboard'); // Default view
+            AOS.refresh(); // Refresh AOS after content is loaded/manipulated
+        });
+    </script>
+</body>
+</html>

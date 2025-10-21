@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ثبت‌نام | PsyClinic</title>
+
+  <!-- Meta Tags -->
+  <meta name="description" content="ثبت‌نام در PsyClinic - کلینیک مجازی تخصصی روانشناسی و مشاوره آنلاین" />
+  <meta name="keywords" content="ثبت‌نام, روانشناسی, مشاوره, کلینیک, PsyClinic, ایران" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://psyclinic.ir/register.html" />
+  <meta property="og:title" content="ثبت‌نام در PsyClinic" />
+  <meta property="og:description" content="به جمع کاربران ما بپیوندید و از خدمات مشاوره و آموزشی ما استفاده کنید." />
+  <meta property="og:image" content="https://psyclinic.ir/images/register-hero.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://psyclinic.ir/register.html" />
+  <meta property="twitter:title" content="ثبت‌نام در PsyClinic" />
+  <meta property="twitter:description" content="به جمع کاربران ما بپیوندید و از خدمات مشاوره و آموزشی ما استفاده کنید." />
+  <meta property="twitter:image" content="https://psyclinic.ir/images/register-hero.jpg" />
+
+  <!-- Bootstrap RTL CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- Main CSS -->
+  <link href="assets/css/main.css" rel="stylesheet" />
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <style>
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #4cc9f0;
+      --dark: #343a40;
+      --light: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background-color: #f5f7fb;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(76, 201, 240, 0.05)),
+                  url('https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .register-card {
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: none;
+      overflow: hidden;
+    }
+
+    .register-header {
+      background: var(--primary-color);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background-color: #5a52d5;
+      border-color: #5a52d5;
+    }
+
+    .social-btn {
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .google-btn {
+      background-color: #db4437;
+      color: white;
+    }
+
+    .facebook-btn {
+      background-color: #4267B2;
+      color: white;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .divider span {
+      padding: 0 10px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a {
+      color: #666;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .eye-icon {
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="sticky-top bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">خانه</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">درباره ما</a></li>
+            <li class="nav-item"><a class="nav-link" href="blog.html">وبلاگ</a></li>
+            <li class="nav-item"><a class="nav-link" href="courses.html">دوره‌ها</a></li>
+            <li class="nav-item"><a class="nav-link" href="psychologists.html">مشاوران</a></li>
+            <li class="nav-item"><a class="nav-link active" href="register.html">ثبت‌نام</a></li>
+          </ul>
+          <div class="d-flex">
+            <a href="login.html" class="btn btn-outline-primary me-2">ورود</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h1 class="display-4 fw-bold mb-4">ثبت‌نام در PsyClinic</h1>
+          <p class="lead mb-4">به جمع کاربران ما بپیوندید و از خدمات مشاوره و آموزشی ما استفاده کنید.</p>
+          <a href="#registerForm" class="btn btn-light btn-lg">
+            <i class="bi bi-person-plus me-2"></i>شروع ثبت‌نام
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER FORM -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8" data-aos="fade-up">
+          <div class="card register-card">
+            <div class="register-header">
+              <h3 class="mb-0">ایجاد حساب کاربری</h3>
+            </div>
+            <div class="card-body p-4">
+              <!-- Hidden honeypot field for spam protection -->
+              <div class="mb-3" style="opacity: 0; position: absolute; left: -9999px;">
+                <label for="website">Leave this field empty</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <form id="registerForm">
+                <div class="row mb-3">
+                  <div class="col-md-6 mb-3">
+                    <label for="firstName" class="form-label">نام</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="lastName" class="form-label">نام خانوادگی</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">ایمیل</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="phone" class="form-label">شماره موبایل (اختیاری)</label>
+                  <input type="tel" class="form-control" id="phone" name="phone" pattern="^(\+98|0)?9\d{9}$">
+                </div>
+
+                <div class="mb-3 password-wrapper">
+                  <label for="password" class="form-label">رمز عبور</label>
+                  <input type="password" class="form-control" id="password" name="password" required minlength="8">
+                  <i class="bi bi-eye eye-icon" onclick="togglePassword('password')"></i>
+                </div>
+
+                <div class="mb-3 password-wrapper">
+                  <label for="confirmPassword" class="form-label">تکرار رمز عبور</label>
+                  <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                  <i class="bi bi-eye eye-icon" onclick="togglePassword('confirmPassword')"></i>
+                </div>
+
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                  <label class="form-check-label" for="terms">
+                    با <a href="terms.html" target="_blank">قوانین و حریم خصوصی</a> موافقم
+                  </label>
+                </div>
+
+                <!-- reCAPTCHA (v3 or checkbox) -->
+                <div class="mb-3">
+                  <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 position-relative">
+                  <span class="spinner-border spinner-border-sm loading-spinner" role="status"></span>
+                  <span class="btn-text">ثبت‌نام</span>
+                </button>
+              </form>
+
+              <!-- Divider -->
+              <div class="divider">
+                <span>یا</span>
+              </div>
+
+              <!-- Social Login -->
+              <div class="d-grid gap-2">
+                <button class="btn social-btn google-btn" onclick="loginWithGoogle()">
+                  <i class="bi bi-google"></i> ثبت‌نام با گوگل
+                </button>
+                <button class="btn social-btn facebook-btn" onclick="loginWithFacebook()">
+                  <i class="bi bi-facebook"></i> ثبت‌نام با فیسبوک
+                </button>
+              </div>
+
+              <!-- Already registered -->
+              <div class="text-center mt-4">
+                <p class="mb-0">قبلاً ثبت‌نام کرده‌اید؟ <a href="login.html" class="text-primary fw-bold">وارد شوید</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+     <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4" data-aos="fade-up">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین با بهترین متخصصان روانشناسی کشور</p>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5>دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li class="mb-2"><a href="psychologists.html" class="text-white-50">مشاوران</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li class="mb-2"><a href="courses.html" class="text-white-50">دوره‌های آموزشی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li class="mb-2"><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li class="mb-2"><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک، پلاک ۱۲۳</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3" data-aos="fade-up">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+                <div class="mt-2">
+                    <a href="privacy.html" class="me-3 text-white-50">حریم خصوصی</a>
+                    <a href="terms.html" class="me-3 text-white-50">شرایط استفاده</a>
+                    <a href="faq.html" class="text-white-50">سوالات متداول</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  <!-- SCRIPTS -->
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800 });
+  </script>
+
+  <!-- reCAPTCHA API -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <!-- Custom JS -->
+  <script>
+    // Toggle password visibility
+    function togglePassword(fieldId) {
+      const field = document.getElementById(fieldId);
+      const icon = field.nextElementSibling;
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+      } else {
+        field.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+      }
+    }
+
+    // Form submission
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const terms = document.getElementById('terms').checked;
+      const recaptchaResponse = grecaptcha.getResponse();
+
+      // Basic validation
+      if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert('رمز عبور و تکرار آن مطابقت ندارند.');
+        return;
+      }
+
+      if (password.length < 8) {
+        alert('رمز عبور باید حداقل ۸ کاراکتر باشد.');
+        return;
+      }
+
+      if (!terms) {
+        alert('لطفاً با قوانین و حریم خصوصی موافقت کنید.');
+        return;
+      }
+
+      if (!recaptchaResponse) {
+        alert('لطفاً تأیید کنید که ربات نیستید.');
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const spinner = submitBtn.querySelector('.loading-spinner');
+      const btnText = submitBtn.querySelector('.btn-text');
+      spinner.style.display = 'inline-block';
+      btnText.textContent = 'در حال ثبت‌نام...';
+      submitBtn.disabled = true;
+
+      // Simulate API call
+      setTimeout(() => {
+        alert('ثبت‌نام با موفقیت انجام شد! لطفاً ایمیل خود را برای تأیید بررسی کنید.');
+        // Redirect to login page
+        window.location.href = 'login.html';
+      }, 2000);
+    });
+
+    // Social login functions
+    function loginWithGoogle() {
+      alert('در حال هدایت به ورود با گوگل...');
+      // In real app: window.location.href = '/auth/google';
+    }
+
+    function loginWithFacebook() {
+      alert('در حال هدایت به ورود با فیسبوک...');
+      // In real app: window.location.href = '/auth/facebook';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دکتر مریم احمدی - پروفایل مشاور - PsyClinic</title>
+
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS for Profile Page -->
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(76, 201, 240, 0.05));
+            padding: 40px 0;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar {
+            width: 200px;
+            height: 200px;
+            border: 6px solid white;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .badge-custom {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin: 5px;
+        }
+
+        .stats-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .stats-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 100px;
+        }
+
+        .rating-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--warning-color), #ffd700);
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-embed:hover {
+            border-color: var(--primary-color);
+            background: rgba(108, 99, 255, 0.05);
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .floating-cta {
+                display: block;
+            }
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="sticky-top bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="PsyClinic Logo" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="bi bi-house-door me-1"></i>صفحه اصلی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="psychologists.html">
+                                <i class="bi bi-people me-1"></i>مشاوران
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">
+                                <i class="bi bi-journal-text me-1"></i>وبلاگ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="courses.html">
+                                <i class="bi bi-book me-1"></i>دوره‌های آموزشی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i>درباره ما
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="bi bi-envelope me-1"></i>تماس با ما
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary me-2">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>ورود
+                        </a>
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i>ثبت‌نام
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <section class="container py-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="index.html"><i class="bi bi-house-door me-1"></i>خانه</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="psychologists.html">مشاوران</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">دکتر مریم احمدی</li>
+            </ol>
+        </nav>
+    </section>
+
+    <!-- PROFILE HEADER -->
+    <section class="container mb-4">
+        <div class="profile-header" data-aos="fade-up">
+            <div class="row align-items-center">
+                <div class="col-lg-3 text-center mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                         class="profile-avatar rounded-circle" alt="دکتر مریم احمدی">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="mb-2">دکتر مریم احمدی</h1>
+                    <h5 class="text-muted mb-3">روانشناس بالینی</h5>
+                    
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="me-4">
+                            <span class="h4 text-warning">⭐️ 4.8</span>
+                            <small class="text-muted ms-2">(۱۲۷ نظر)</small>
+                        </div>
+                        <div>
+                            <small class="text-muted">
+                                <i class="bi bi-geo-alt me-1"></i>تهران
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Badges -->
+                    <div class="mb-3">
+                        <span class="badge-custom">
+                            <i class="bi bi-check-circle me-1"></i>تأیید شده
+                        </span>
+                        <span class="badge-custom">
+                            <i class="bi bi-lightning me-1"></i>پاسخ سریع
+                        </span>
+                        <span class="badge-custom">
+                            <i class="bi bi-award me-1"></i>۱۰+ سال تجربه
+                        </span>
+                    </div>
+
+                    <p class="lead mb-0">
+                        روانشناس بالینی با بیش از ۱۰ سال تجربه در درمان اضطراب، افسردگی و اختلالات خلقی. 
+                        متخصص در رویکردهای شناخت‌درمانی (CBT) و پذیرش و تعهد (ACT).
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <div class="stats-card">
+                        <div class="stats-number">۱,۲۳۴</div>
+                        <div class="text-muted">جلسات برگزار شده</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-number">۹۵%</div>
+                        <div class="text-muted">رضایت مراجعین</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="row">
+            <!-- Main Column (80%) -->
+            <div class="col-lg-8">
+                <!-- Video Introduction -->
+                <div class="mb-4" data-aos="fade-up">
+                    <h5 class="mb-3">
+                        <i class="bi bi-play-circle me-2 text-primary"></i>ویدیوی معرفی
+                    </h5>
+                    <div class="video-embed" data-bs-toggle="modal" data-bs-target="#videoModal">
+                        <div class="text-center">
+                            <i class="bi bi-play-circle" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <p class="mt-2 text-muted">کلیک کنید تا ویدیوی معرفی را مشاهده کنید</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <ul class="nav nav-tabs mb-4" id="profileTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">
+                                <i class="bi bi-person me-1"></i>درباره من
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="blog-tab" data-bs-toggle="tab" data-bs-target="#blog" type="button" role="tab">
+                                <i class="bi bi-journal-text me-1"></i>وبلاگ
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
+                                <i class="bi bi-star me-1"></i>نظرات
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses" type="button" role="tab">
+                                <i class="bi bi-book me-1"></i>دوره‌ها
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="profileTabsContent">
+                        <!-- About Tab -->
+                        <div class="tab-pane fade show active" id="about" role="tabpanel">
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <!-- Biography -->
+                                <h5 class="mb-3">
+                                    <i class="bi bi-person-lines-fill me-2 text-primary"></i>بیوگرافی
+                                </h5>
+                                <p>
+                                    با بیش از ۱۰ سال تجربه در حوزه روانشناسی بالینی، من به کمک افراد در غلبه بر چالش‌های روانی 
+                                    و بهبود کیفیت زندگی‌شان متعهد هستم. رویکرد من ترکیبی از روش‌های مبتنی بر شواهد علمی و 
+                                    درک عمیق از نیازهای فردی هر مراجع است.
+                                </p>
+                                <p>
+                                    در طول این سال‌ها، با موفقیت بیش از ۱۲۰۰ مراجع را همراهی کرده‌ام و شاهد تحولات مثبت 
+                                    در زندگی آن‌ها بوده‌ام. تخصص اصلی من در درمان اضطراب، افسردگی، و اختلالات مرتبط با استرس است.
+                                </p>
+
+                                <hr class="my-4">
+
+                                <!-- Education -->
+                                <h5 class="mb-3">
+                                    <i class="bi bi-mortarboard me-2 text-primary"></i>تحصیلات
+                                </h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <strong>دکترای روانشناسی بالینی</strong> - دانشگاه تهران (۱۳۹۰-۱۳۹۵)
+                                    </li>
+                                    <li class="mb-2">
+                                        <strong>کارشناسی ارشد روانشناسی بالینی</strong> - دانشگاه علامه طباطبایی (۱۳۸۶-۱۳۸۸)
+                                    </li>
+                                    <li class="mb-2">
+                                        <strong>کارشناسی روانشناسی</strong> - دانشگاه تهران (۱۳۸۲-۱۳۸۶)
+                                    </li>
+                                </ul>
+
+                                <hr class="my-4">
+
+                                <!-- Approaches -->
+                                <h5 class="mb-3">
+                                    <i class="bi bi-gear me-2 text-primary"></i>رویکردهای درمانی
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">
+                                                <i class="bi bi-check-circle text-success me-2"></i>
+                                                شناخت‌درمانی (CBT)
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="bi bi-check-circle text-success me-2"></i>
+                                                پذیرش و تعهد (ACT)
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="bi bi-check-circle text-success me-2"></i>
+                                                ذهن‌آگاهی (Mindfulness)
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">
+                                                <i class="bi bi-check-circle text-success me-2"></i>
+                                                درمان دیالکتیکی رفتاری (DBT)
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="bi bi-check-circle text-success me-2"></i>
+                                                روان‌درمانی انسان‌گرا
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="bi bi-check-circle text-success me-2"></i>
+                                                درمان خانواده‌محور
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Certificates -->
+                                <h5 class="mb-3">
+                                    <i class="bi bi-award me-2 text-primary"></i>گواهینامه‌ها
+                                </h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="bi bi-patch-check text-primary me-2"></i>
+                                        گواهی CBT (شناخت‌درمانی) - موسسه Beck
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-patch-check text-primary me-2"></i>
+                                        گواهی ACT (پذیرش و تعهد) - موسسه Hayes
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-patch-check text-primary me-2"></i>
+                                        گواهی EMDR - انجمن EMDR ایران
+                                    </li>
+                                </ul>
+
+                                <hr class="my-4">
+
+                                <!-- Contact & Office -->
+                                <h5 class="mb-3">
+                                    <i class="bi bi-geo-alt me-2 text-primary"></i>آدرس مطب
+                                </h5>
+                                <p>
+                                    <strong>تهران، ولنجک، خیابان فردوسی، پلاک ۱۲۳</strong><br>
+                                    <small class="text-muted">
+                                        <i class="bi bi-telephone me-1"></i>۰۲۱-۲۲۳۴۵۶۷۸
+                                    </small>
+                                </p>
+                                
+                                <!-- Map -->
+                                <div class="ratio ratio-16x9 mt-3" style="max-height: 300px;">
+                                    <iframe 
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.374!2d51.41!3d35.76!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQ1JzM2LjAiTiA1McKwMjQnMzYuMCJF!5e0!3m2!1sen!2s!4v1234567890" 
+                                        style="border:0;" 
+                                        allowfullscreen="" 
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Tab -->
+                        <div class="tab-pane fade" id="blog" role="tabpanel">
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <h5 class="mb-4">آخرین مقالات و ویدیوها</h5>
+                                <div class="row g-4">
+                                    <!-- Article 1 -->
+                                    <div class="col-md-6">
+    <a href="blog-post.html?id=123&psychologist=1" class="text-decoration-none">
+        <div class="card h-100">
+            <img src="..." class="card-img-top" alt="مقاله">
+            <div class="card-body">
+                <h6 class="card-title">چگونه با اضطراب کنار بیاییم؟</h6>
+                <p class="card-text small text-muted">
+                    راهکارهای عملی برای کاهش استرس...
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">۳ روز پیش</small>
+                    <small class="text-muted">
+                        <i class="bi bi-eye me-1"></i>۱۲۴
+                        <i class="bi bi-chat ms-2 me-1"></i>۸
+                    </small>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+                                    <!-- Article 2 -->
+                                    <div class="col-md-6">
+                                        <div class="card h-100">
+                                            <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                                 class="card-img-top" alt="ویدیو" style="height: 200px; object-fit: cover;">
+                                            <div class="card-body">
+                                                <h6 class="card-title">تکنیک‌های تنفس برای آرامش</h6>
+                                                <p class="card-text small text-muted">
+                                                    آموزش گام به گام تکنیک‌های تنفس برای کاهش استرس...
+                                                </p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <small class="text-muted">۱ هفته پیش</small>
+                                                    <small class="text-muted">
+                                                        <i class="bi bi-eye me-1"></i>۲۳۴
+                                                        <i class="bi bi-chat ms-2 me-1"></i>۱۵
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <a href="blog.html?author=1" class="btn btn-outline-primary">
+                                        مشاهده همه مقالات
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reviews Tab -->
+                        <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <!-- Rating Statistics -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <h5 class="mb-3">آمار امتیازها</h5>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">۵ ستاره</span>
+                                            <div class="rating-bar flex-grow-1 me-2">
+                                                <div class="rating-fill" style="width: 85%"></div>
+                                            </div>
+                                            <small class="text-muted">۸۵%</small>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">۴ ستاره</span>
+                                            <div class="rating-bar flex-grow-1 me-2">
+                                                <div class="rating-fill" style="width: 12%"></div>
+                                            </div>
+                                            <small class="text-muted">۱۲%</small>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">۳ ستاره</span>
+                                            <div class="rating-bar flex-grow-1 me-2">
+                                                <div class="rating-fill" style="width: 3%"></div>
+                                            </div>
+                                            <small class="text-muted">۳%</small>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">۲ ستاره</span>
+                                            <div class="rating-bar flex-grow-1 me-2">
+                                                <div class="rating-fill" style="width: 0%"></div>
+                                            </div>
+                                            <small class="text-muted">۰%</small>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="me-2">۱ ستاره</span>
+                                            <div class="rating-bar flex-grow-1 me-2">
+                                                <div class="rating-fill" style="width: 0%"></div>
+                                            </div>
+                                            <small class="text-muted">۰%</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="display-4 text-warning mb-2">⭐️ 4.8</div>
+                                        <p class="text-muted">از ۱۲۷ نظر</p>
+                                        <!-- Filter -->
+                                        <select class="form-select mt-3">
+                                            <option>مرتب‌سازی: جدیدترین</option>
+                                            <option>قدیمی‌ترین</option>
+                                            <option>بالاترین امتیاز</option>
+                                            <option>پایین‌ترین امتیاز</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Reviews List -->
+                                <h6 class="mb-3">نظرات مراجعین</h6>
+                                
+                                <!-- Review 1 -->
+                                <div class="review-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div>
+                                            <strong>زهرا محمدی</strong>
+                                            <div class="text-warning">⭐️⭐️⭐️⭐️⭐️</div>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="text-muted">۲ روز پیش</small>
+                                            <div>
+                                                <span class="badge bg-success">
+                                                    <i class="bi bi-check-circle me-1"></i>رزرو تأیید شده
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0">
+                                        دکتر احمدی فوق‌العاده حرفه‌ای و دلسوز هستند. جلسات برایم بسیار مفید بود و 
+                                        راهکارهای عملی خوبی یاد گرفتم. پیشرفت قابل توجهی در مدیریت اضطرابم داشتم.
+                                    </p>
+                                </div>
+
+                                <!-- Review 2 -->
+                                <div class="review-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div>
+                                            <strong>علی رضایی</strong>
+                                            <div class="text-warning">⭐️⭐️⭐️⭐️☆</div>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="text-muted">۱ هفته پیش</small>
+                                            <div>
+                                                <span class="badge bg-success">
+                                                    <i class="bi bi-check-circle me-1"></i>رزرو تأیید شده
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0">
+                                        مشاور خوبی است و راهکارهای مفیدی ارائه می‌دهد. تنها نکته اینکه گاهی جلسات 
+                                        کمی دیر شروع می‌شود، اما به طور کلی راضی هستم.
+                                    </p>
+                                </div>
+
+                                <!-- Review 3 -->
+                                <div class="review-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div>
+                                            <strong>مریم کریمی</strong>
+                                            <div class="text-warning">⭐️⭐️⭐️⭐️⭐️</div>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="text-muted">۲ هفته پیش</small>
+                                            <div>
+                                                <span class="badge bg-success">
+                                                    <i class="bi bi-check-circle me-1"></i>رزرو تأیید شده
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0">
+                                        تجربه فوق‌العاده‌ای داشتم. دکتر احمدی با صبر و حوصله به مشکلم گوش دادند و 
+                                        روش‌های درمانی خیلی مؤثری به من آموختند. حتماً توصیه می‌کنم.
+                                    </p>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <button class="btn btn-outline-primary">
+                                        نمایش نظرات بیشتر
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Courses Tab -->
+                        <div class="tab-pane fade" id="courses" role="tabpanel">
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <h5 class="mb-4">دوره‌های آموزشی</h5>
+                                
+                                <div class="row g-4">
+                                    <!-- Course 1 -->
+                                    <div class="col-md-6">
+                                        <div class="course-card">
+                                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                                 class="card-img-top" alt="دوره" style="height: 200px; object-fit: cover;">
+                                            <div class="p-3">
+                                                <h6 class="mb-2">مبانی مدیریت استرس</h6>
+                                                <p class="small text-muted mb-3">
+                                                    آموزش کامل تکنیک‌های مدیریت استرس و اضطراب در زندگی روزمره
+                                                </p>
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <small class="text-muted">
+                                                        <i class="bi bi-clock me-1"></i>۱۲ درس | ۴ ساعت
+                                                    </small>
+                                                    <small class="text-muted">
+                                                        <i class="bi bi-people me-1"></i>۲۳۴ دانشجو
+                                                    </small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="h6 text-primary">۹۰۰,۰۰۰ تومان</span>
+                                                    <a href="course-detail.html?id=1" class="btn btn-sm btn-primary">
+                                                        مشاهده دوره
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Course 2 -->
+                                    <div class="col-md-6">
+                                        <div class="course-card">
+                                            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                                 class="card-img-top" alt="دوره" style="height: 200px; object-fit: cover;">
+                                            <div class="p-3">
+                                                <h6 class="mb-2">روش‌های شناخت‌درمانی (CBT)</h6>
+                                                <p class="small text-muted mb-3">
+                                                    آشنایی با اصول و تکنیک‌های شناخت‌درمانی برای عموم
+                                                </p>
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <small class="text-muted">
+                                                        <i class="bi bi-clock me-1"></i>۸ درس | ۶ ساعت
+                                                    </small>
+                                                    <small class="text-muted">
+                                                        <i class="bi bi-people me-1"></i>۱۲۸ دانشجو
+                                                    </small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="h6 text-primary">۱,۲۰۰,۰۰۰ تومان</span>
+                                                    <a href="course-detail.html?id=2" class="btn btn-sm btn-primary">
+                                                        مشاهده دوره
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <a href="courses.html?instructor=1" class="btn btn-outline-primary">
+                                        مشاهده همه دوره‌ها
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar (20%) -->
+            <div class="col-lg-4">
+                <div class="sidebar-sticky">
+                    <!-- Price & Booking Card -->
+                    <div class="card shadow-sm mb-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">رزرو جلسه</h5>
+                            <div class="mb-3">
+                                <span class="h3 text-primary">۱۵۰,۰۰۰</span>
+                                <span class="text-muted">تومان</span>
+                                <br>
+                                <small class="text-muted">(۴۵ دقیقه)</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <small class="text-muted d-block">
+                                    <i class="bi bi-calendar-check me-1"></i>
+                                    اولین وقت آزاد: <strong>سه‌شنبه ۱۰:۰۰</strong>
+                                </small>
+                            </div>
+
+                            <a href="booking.html?psychologist=1" class="btn btn-primary btn-lg w-100 mb-3">
+                                <i class="bi bi-calendar-plus me-2"></i>رزرو وقت
+                            </a>
+
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-danger w-100" onclick="toggleFollow()">
+                                        <i class="bi bi-heart" id="followIcon"></i>
+                                        <span id="followText">دنبال کردن</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#messageModal">
+                                        <i class="bi bi-envelope"></i>
+                                        پیام
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Working Hours -->
+                    <div class="card shadow-sm mb-4" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="bi bi-clock me-2 text-primary"></i>ساعات کاری
+                            </h6>
+                            <ul class="list-unstyled mb-0 small">
+                                <li class="mb-1">شنبه تا چهارشنبه: ۹:۰۰ - ۱۷:۰۰</li>
+                                <li class="mb-1">پنج‌شنبه: ۹:۰۰ - ۱۳:۰۰</li>
+                                <li class="mb-1">جمعه: تعطیل</li>
+                            </ul>
+                            <hr class="my-3">
+                            <small class="text-muted">
+                                <i class="bi bi-lightning me-1"></i>
+                                زمان پاسخگویی: حداکثر ۲۴ ساعت
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="card shadow-sm" data-aos="fade-up" data-aos-delay="800">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">اشتراک‌گذاری پروفایل</h6>
+                            <div class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="shareProfile('telegram')">
+                                    <i class="bi bi-telegram"></i>
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="shareProfile('whatsapp')">
+                                    <i class="bi bi-whatsapp"></i>
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="shareProfile('copy')">
+                                    <i class="bi bi-link-45deg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating CTA (Mobile Only) -->
+    <div class="floating-cta">
+        <a href="booking.html?psychologist=1" class="btn btn-primary btn-lg w-100">
+            <i class="bi bi-calendar-plus me-2"></i>رزرو وقت - ۱۵۰,۰۰۰ تومان
+        </a>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ویدیوی معرفی دکتر مریم احمدی</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ارسال پیام به دکتر مریم احمدی</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">موضوع</label>
+                            <input type="text" class="form-control" placeholder="موضوع پیام...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">پیام</label>
+                            <textarea class="form-control" rows="4" placeholder="پیام خود را بنویسید..."></textarea>
+                        </div>
+                        <div class="alert alert-info">
+                            <small>
+                                <i class="bi bi-info-circle me-1"></i>
+                                شما فقط می‌توانید یک پیام قبل از رزرو ارسال کنید.
+                            </small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-primary">ارسال پیام</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <img src="https://via.placeholder.com/150x50.png?text=PsyClinic" alt="Logo" class="mb-3">
+                    <p>کلینیک مجازی PsyClinic — خدمات مشاوره و آموزش آنلاین</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>دسترسی سریع</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white-50">صفحه اصلی</a></li>
+                        <li><a href="psychologists.html" class="text-white-50">مشاوران</a></li>
+                        <li><a href="blog.html" class="text-white-50">وبلاگ</a></li>
+                        <li><a href="courses.html" class="text-white-50">دوره‌ها</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>راهنما</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="text-white-50">درباره ما</a></li>
+                        <li><a href="contact.html" class="text-white-50">تماس با ما</a></li>
+                        <li><a href="faq.html" class="text-white-50">سوالات متداول</a></li>
+                        <li><a href="privacy.html" class="text-white-50">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt me-2"></i>تهران، ولنجک</li>
+                        <li><i class="bi bi-telephone me-2"></i>۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@psyclinic.ir</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; ۱۴۰۴ PsyClinic. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Follow functionality
+        let isFollowing = false;
+        function toggleFollow() {
+            const icon = document.getElementById('followIcon');
+            const text = document.getElementById('followText');
+            
+            if (isFollowing) {
+                icon.className = 'bi bi-heart';
+                text.textContent = 'دنبال کردن';
+                isFollowing = false;
+            } else {
+                icon.className = 'bi bi-heart-fill';
+                text.textContent = 'دنبال شده';
+                isFollowing = true;
+            }
+        }
+
+        // Share functionality
+        function shareProfile(platform) {
+            const url = window.location.href;
+            const text = 'پروفایل دکتر مریم احمدی - روانشناس بالینی';
+            
+            switch(platform) {
+                case 'telegram':
+                    window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`);
+                    break;
+                case 'whatsapp':
+                    window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`);
+                    break;
+                case 'copy':
+                    navigator.clipboard.writeText(url).then(() => {
+                        alert('لینک کپی شد!');
+                    });
+                    break;
+            }
+        }
+
+        // Tab switching with history
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash) {
+                const tabTrigger = document.querySelector(`[data-bs-target="${hash}"]`);
+                if (tabTrigger) {
+                    const tab = new bootstrap.Tab(tabTrigger);
+                    tab.show();
+                }
+            }
+        });
+    </script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/blog-post.js"></script>
+</body>
+</html>
